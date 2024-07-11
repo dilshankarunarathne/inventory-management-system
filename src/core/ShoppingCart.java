@@ -18,3 +18,9 @@ public class ShoppingCart {
 
     public double calculateTotalCost() {
         double total = 0;
+        for (Product product : products) {
+            total += product.getPrice();
+        }
+        return total;
+    }
+}
