@@ -47,8 +47,7 @@ public abstract class Product {
 
     @Override
     public String toString() {
-        return "Clothing [" +
-                getProductId() +
+        return "Clothing [" + getProductId() +
                 ": " + getProductName() +
                 ", avail=" + getAvailableItems() +
                 ", price=" + getPrice() +
