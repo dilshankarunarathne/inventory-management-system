@@ -25,4 +25,6 @@ public class Clothing extends Product {
     public void setColor(String color) {
         this.color = color;
     }
+
+    
 }
