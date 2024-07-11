@@ -37,6 +37,4 @@ public class WestminsterShoppingManager implements ShoppingManager {
     public void logoutUser(String userId) {
         // Implementation code here, handling user logout
     }
-
-    // Additional Westminster-specific methods can be implemented here
 }
