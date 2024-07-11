@@ -5,14 +5,14 @@ import core.ShoppingCart;
 import javax.swing.*;
 import java.awt.*;
 
-public class MainWindow extends JFrame {
+public class Main extends JFrame {
     private JComboBox<String> categorySelector;
     private JTable productTable;
     private JTextArea productDetails;
     private JButton viewCartButton, addToCartButton;
     private ShoppingCart cart;
 
-    public MainWindow(ShoppingCart cart) {
+    public Main(ShoppingCart cart) {
         super("Westminster Shopping Centre");
         this.cart = cart;
         setSize(800, 600);
