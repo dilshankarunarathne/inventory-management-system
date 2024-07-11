@@ -1,3 +1,5 @@
+package core;
+
 public abstract class Product {
     private String productId;
     private String productName;
