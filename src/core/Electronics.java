@@ -1,3 +1,5 @@
+package core;
+
 public class Electronics extends Product {
     private String brand;
     private int warrantyPeriod;
