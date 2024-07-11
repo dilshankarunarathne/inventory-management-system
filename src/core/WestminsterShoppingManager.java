@@ -118,7 +118,7 @@ public class WestminsterShoppingManager implements ShoppingManager {
     }
 
     @SuppressWarnings("unchecked")
-    private void loadProducts() {
+    public void loadProducts() {
         File file = new File(PRODUCTS_FILE);
         if (file.exists()) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
