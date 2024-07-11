@@ -25,4 +25,6 @@ public class Electronics extends Product {
     public void setWarrantyPeriod(int warrantyPeriod) {
         this.warrantyPeriod = warrantyPeriod;
     }
+
+    
 }
