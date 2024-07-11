@@ -47,13 +47,11 @@ public abstract class Product {
 
     @Override
     public String toString() {
-        return "Clothing{" +
-                "productId='" + getProductId() + '\'' +
-                ", productName='" + getProductName() + '\'' +
-                ", availableItems=" + getAvailableItems() +
+        return "Clothing [" +
+                getProductId() +
+                ": " + getProductName() +
+                ", avail=" + getAvailableItems() +
                 ", price=" + getPrice() +
-                ", size='" + size + '\'' +
-                ", color='" + color + '\'' +
-                '}';
+                ']';
     }
 }
