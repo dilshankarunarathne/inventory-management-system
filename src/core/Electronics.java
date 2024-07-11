@@ -26,5 +26,9 @@ public class Electronics extends Product {
         this.warrantyPeriod = warrantyPeriod;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Electronics [" + getProductId() + ": " + getProductName() + ", avail=" + getAvailableItems() +
+                ", price=" + getPrice() + ", brand=" + getBrand() + ", warrantyPeriod=" + getWarrantyPeriod() + ']';
+    }
 }
