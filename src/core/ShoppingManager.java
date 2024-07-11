@@ -8,4 +8,5 @@ public interface ShoppingManager {
     void deleteProduct(Scanner scanner);
     void printProducts();
     void saveProducts();
+    void loadProducts();
 }
