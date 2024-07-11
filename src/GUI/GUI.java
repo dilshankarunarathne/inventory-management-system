@@ -1,5 +1,7 @@
 package GUI;
 
+import core.ShoppingCart;
+
 import javax.swing.*;
 import java.awt.*;
 
