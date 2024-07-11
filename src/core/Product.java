@@ -45,5 +45,15 @@ public abstract class Product {
         this.price = price;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Clothing{" +
+                "productId='" + getProductId() + '\'' +
+                ", productName='" + getProductName() + '\'' +
+                ", availableItems=" + getAvailableItems() +
+                ", price=" + getPrice() +
+                ", size='" + size + '\'' +
+                ", color='" + color + '\'' +
+                '}';
+    }
 }
