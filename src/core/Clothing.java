@@ -26,5 +26,9 @@ public class Clothing extends Product {
         this.color = color;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Clothing [" + getProductId() + ": " + getProductName() + ", avail=" + getAvailableItems() +
+                ", price=" + getPrice() + ", size=" + getSize() + ", color=" + getColor() + ']';
+    }
 }
