@@ -70,7 +70,7 @@ public class WestminsterShoppingManager implements ShoppingManager {
             String brand = scanner.nextLine();
             System.out.print("Enter warranty period: ");
             String warrantyPeriod = scanner.nextLine();
-            product = new Electronics(productId, productName, availableItems, price, brand, warrantyPeriod);
+            product = new Electronics(productId, productName, availableItems, price, brand, Integer.parseInt(warrantyPeriod));
         } else if ("Clothing".equalsIgnoreCase(type)) {
             System.out.print("Enter size: ");
             String size = scanner.nextLine();
