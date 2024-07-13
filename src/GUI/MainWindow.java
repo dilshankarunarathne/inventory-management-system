@@ -1,5 +1,6 @@
 package GUI;
 
+import core.Clothing;
 import core.Product;
 import core.ShoppingCart;
 import core.WestminsterShoppingManager;
@@ -14,9 +15,9 @@ import javax.swing.table.DefaultTableModel;
 public class MainWindow extends JFrame {
     private JComboBox<String> categorySelector;
     private JTable productTable;
-    private JTextArea productDetails;
     private JButton viewCartButton, addToCartButton;
     private ShoppingCart cart;
+    private JTextField productIdField, categoryNameField, nameField, sizeField, colorField, itemsAvailableField;
 
     private WestminsterShoppingManager westminsterShoppingManager;
 
@@ -39,10 +40,6 @@ public class MainWindow extends JFrame {
         productTable = new JTable(data, columnNames);
         add(new JScrollPane(productTable), BorderLayout.CENTER);
 
-        // Product Details
-        productDetails = new JTextArea(5, 20);
-        add(productDetails, BorderLayout.SOUTH);
-
         // Add to Cart Button
         addToCartButton = new JButton("Add to Shopping Cart");
         add(addToCartButton, BorderLayout.SOUTH);
@@ -50,6 +47,29 @@ public class MainWindow extends JFrame {
         // View Cart Button
         viewCartButton = new JButton("View Shopping Cart");
         add(viewCartButton, BorderLayout.EAST);
+
+        productIdField = new JTextField(10);
+        categoryNameField = new JTextField(10);
+        nameField = new JTextField(10);
+        sizeField = new JTextField(10);
+        colorField = new JTextField(10);
+        itemsAvailableField = new JTextField(10);
+        // Add a panel for the form
+        JPanel formPanel = new JPanel(new GridLayout(6, 2));
+        formPanel.add(new JLabel("Product ID:"));
+        formPanel.add(productIdField);
+        formPanel.add(new JLabel("Category:"));
+        formPanel.add(categoryNameField);
+        formPanel.add(new JLabel("Name:"));
+        formPanel.add(nameField);
+        formPanel.add(new JLabel("Size:"));
+        formPanel.add(sizeField);
+        formPanel.add(new JLabel("Color:"));
+        formPanel.add(colorField);
+        formPanel.add(new JLabel("Items Available:"));
+        formPanel.add(itemsAvailableField);
+        // Add the formPanel to the JFrame
+        add(formPanel, BorderLayout.SOUTH);
 
         // Event Listeners
         setupListeners();
@@ -60,9 +80,18 @@ public class MainWindow extends JFrame {
         // Selecting Products
         productTable.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && productTable.getSelectedRow() != -1) {
-                // Assuming product details are in the 4th column (index 3)
-                String details = (String) productTable.getValueAt(productTable.getSelectedRow(), 4);
-                productDetails.setText(details);
+                String productId = (String) productTable.getValueAt(productTable.getSelectedRow(), 0);
+                Product selectedProduct = findProductById(productId);
+                if (selectedProduct != null) {
+                    productIdField.setText(selectedProduct.getProductId());
+                    categoryNameField.setText(selectedProduct.getCategory());
+                    nameField.setText(selectedProduct.getProductName());
+                    // Assuming size and color are attributes of Clothing and Electronics respectively
+                    // You might need to adjust this logic based on your Product class structure
+                    sizeField.setText(selectedProduct instanceof Clothing ? ((Clothing) selectedProduct).getSize() : "");
+                    colorField.setText(selectedProduct instanceof Clothing ? ((Clothing) selectedProduct).getColor() : "");
+                    itemsAvailableField.setText(String.valueOf(selectedProduct.getAvailableItems()));
+                }
             }
         });
 
@@ -95,7 +124,8 @@ public class MainWindow extends JFrame {
             data[i][1] = product.getProductName();
             data[i][2] = product.getCategory();
             data[i][3] = product.getPrice();
-            data[i][4] = "Details"; // Assuming you have a method to generate details or have a details field
+            // Update this line to include actual product details instead of just "Details"
+            data[i][4] = product.toString(); // Assuming toString() method of Product class returns the details
         }
 
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
