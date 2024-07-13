@@ -12,6 +12,26 @@ public class WestminsterShoppingManager implements ShoppingManager {
         loadProducts();
     }
 
+    public void addProduct(String type, String productId, String productName, int availableItems, double price, String brandOrSize, String warrantyPeriodOrColor) {
+        Product product = null;
+        if ("Electronics".equalsIgnoreCase(type)) {
+            product = new Electronics(productId, productName, availableItems, price, brandOrSize, Integer.parseInt(warrantyPeriodOrColor));
+        } else if ("Clothing".equalsIgnoreCase(type)) {
+            product = new Clothing(productId, productName, availableItems, price, brandOrSize, warrantyPeriodOrColor);
+        }
+
+        if (product != null) {
+            if (products.size() < MAX_PRODUCTS) {
+                products.put(productId, product);
+                System.out.println("Product added successfully.");
+            } else {
+                System.out.println("Cannot add more products. The system is at its maximum capacity.");
+            }
+        } else {
+            System.out.println("Product type is not recognized.");
+        }
+    }
+
     public void displayMenu() {
         Scanner scanner = new Scanner(System.in);
         String choice;
