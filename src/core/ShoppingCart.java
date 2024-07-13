@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ShoppingCart {
     private List<Product> products;
-    private boolean isFirstPurchase = true; // Assuming this is the first purchase by default
+    private boolean isFirstPurchase;
 
     public ShoppingCart() {
         this.products = new ArrayList<>();
+        this.isFirstPurchase = true; // Assuming this is the first purchase by default
     }
 
     public void addProduct(Product product) {
@@ -21,32 +23,32 @@ public class ShoppingCart {
         products.remove(product);
     }
 
-    public double calculateTotalCost() {
-        double total = 0;
-        for (Product product : products) {
-            total += product.getPrice();
-        }
-        return total;
+    public double calculateTotalWithoutDiscount() {
+        return products.stream().mapToDouble(Product::getPrice).sum();
     }
 
-    public double calculateDiscounts() {
-        double discount = 0;
+    public double calculateFirstPurchaseDiscount() {
         if (isFirstPurchase) {
-            discount += calculateTotalCost() * 0.1; // 10% discount
-            isFirstPurchase = false; // Update the flag after applying the first purchase discount
+            return calculateTotalWithoutDiscount() * 0.1; // 10% discount
         }
-        Map<String, Integer> categoryCounts = getCategoryCounts();
-        for (Integer count : categoryCounts.values()) {
+        return 0;
+    }
+
+    public double calculateCategoryDiscount() {
+        Map<String, Long> categoryCounts = products.stream().collect(Collectors.groupingBy(Product::getCategory, Collectors.counting()));
+        for (Long count : categoryCounts.values()) {
             if (count >= 3) {
-                discount += calculateTotalCost() * 0.2; // 20% discount for 3 or more items of the same category
-                break; // Assuming the discount is applied only once per purchase
+                return calculateTotalWithoutDiscount() * 0.2; // 20% discount
             }
         }
-        return discount;
+        return 0;
     }
 
     public double calculateFinalTotal() {
-        return calculateTotalCost() - calculateDiscounts();
+        double total = calculateTotalWithoutDiscount();
+        total -= calculateFirstPurchaseDiscount();
+        total -= calculateCategoryDiscount();
+        return total;
     }
 
     private Map<String, Integer> getCategoryCounts() {
@@ -56,14 +58,6 @@ public class ShoppingCart {
             categoryCounts.put(category, categoryCounts.getOrDefault(category, 0) + 1);
         }
         return categoryCounts;
-    }
-
-    public double calculateTotalWithoutDiscount() {
-        double total = 0;
-        for (Product product : products) {
-            total += product.getPrice();
-        }
-        return total;
     }
 
     public Map<Product, Integer> getItems() {
