@@ -9,13 +9,16 @@ public class AvailabilityCellRenderer extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        if (column == 4) { // Assuming the 'Items Available' column is at index 4
+        System.out.println("adsada");
+        try {
             int availableItems = Integer.parseInt(value.toString());
             if (availableItems < 3) {
                 c.setForeground(Color.RED);
             } else {
                 c.setForeground(Color.BLACK);
             }
+        } catch (NumberFormatException e) {
+            c.setForeground(Color.BLACK); // Default color if parsing fails
         }
         return c;
     }
