@@ -9,6 +9,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.table.DefaultTableModel;
+
 public class MainWindow extends JFrame {
     private JComboBox<String> categorySelector;
     private JTable productTable;
@@ -51,6 +53,7 @@ public class MainWindow extends JFrame {
 
         // Event Listeners
         setupListeners();
+        refreshProductTable();
     }
 
     private void setupListeners() {
@@ -79,6 +82,24 @@ public class MainWindow extends JFrame {
             ShoppingCartWindow cartWindow = new ShoppingCartWindow(cart);
             cartWindow.setVisible(true);
         });
+    }
+
+    private void refreshProductTable() {
+        List<Product> allProducts = getAllProducts();
+        String[] columnNames = {"Product ID", "Name", "Category", "Price", "Info"};
+        Object[][] data = new Object[allProducts.size()][columnNames.length];
+
+        for (int i = 0; i < allProducts.size(); i++) {
+            Product product = allProducts.get(i);
+            data[i][0] = product.getProductId();
+            data[i][1] = product.getProductName();
+            data[i][2] = product.getCategory();
+            data[i][3] = product.getPrice();
+            data[i][4] = "Details"; // Assuming you have a method to generate details or have a details field
+        }
+
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        productTable.setModel(model);
     }
 
     // Method to find a Product by its ID
