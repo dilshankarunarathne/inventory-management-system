@@ -21,6 +21,7 @@ public class MainWindow extends JFrame {
     private JLabel productIdLabel, categoryNameLabel, nameLabel, sizeLabel, colorLabel, itemsAvailableLabel;
     // Declaration of dynamic attribute labels
     private JLabel attribute1Label, attribute2Label;
+    private JLabel attribute1NameLabel, attribute2NameLabel;
 
     private WestminsterShoppingManager westminsterShoppingManager;
 
@@ -91,12 +92,20 @@ public class MainWindow extends JFrame {
         formPanel.add(categoryNameLabel);
         formPanel.add(new JLabel("Name:"));
         formPanel.add(nameLabel);
-        formPanel.add(new JLabel("Attribute 1:")); // Generic label, will be dynamically updated
-        formPanel.add(attribute1Label);
-        formPanel.add(new JLabel("Attribute 2:")); // Generic label, will be dynamically updated
-        formPanel.add(attribute2Label);
+//        formPanel.add(new JLabel("Attribute 1:"));
+//        formPanel.add(attribute1Label);
+//        formPanel.add(new JLabel("Attribute 2:"));
+//        formPanel.add(attribute2Label);
         formPanel.add(new JLabel("Items Available:"));
         formPanel.add(itemsAvailableLabel);
+
+        // Inside the MainWindow constructor or an initialization method
+        attribute1NameLabel = new JLabel("Attribute 1:");
+        attribute2NameLabel = new JLabel("Attribute 2:");
+        formPanel.add(attribute1NameLabel);
+        formPanel.add(attribute1Label);
+        formPanel.add(attribute2NameLabel);
+        formPanel.add(attribute2Label);
 
         // Add the formPanel to the JFrame
         add(formPanel, BorderLayout.SOUTH);
@@ -153,6 +162,25 @@ public class MainWindow extends JFrame {
         updateProductTable(getAllProducts());
     }
 
+    private void updateAttributeLabels(Product selectedProduct) {
+    if (selectedProduct instanceof Clothing) {
+        attribute1NameLabel.setText("Size:");
+        attribute2NameLabel.setText("Color:");
+        attribute1Label.setText(((Clothing) selectedProduct).getSize());
+        attribute2Label.setText(((Clothing) selectedProduct).getColor());
+    } else if (selectedProduct instanceof Electronics) {
+        attribute1NameLabel.setText("Brand:");
+        attribute2NameLabel.setText("Warranty Period:");
+        attribute1Label.setText(((Electronics) selectedProduct).getBrand());
+        attribute2Label.setText(((Electronics) selectedProduct).getWarrantyPeriod() + " years");
+    } else {
+        attribute1NameLabel.setText("N/A");
+        attribute2NameLabel.setText("N/A");
+        attribute1Label.setText("");
+        attribute2Label.setText("");
+    }
+}
+
     private void addProductToCart(String productId) {
         Product product = findProductById(productId);
         if (product != null) {
@@ -175,13 +203,16 @@ public class MainWindow extends JFrame {
                     nameLabel.setText(selectedProduct.getProductName());
                     itemsAvailableLabel.setText(String.valueOf(selectedProduct.getAvailableItems()));
 
+                    // Update the attribute labels based on the product category
+                    updateAttributeLabels(selectedProduct);
+
                     // Dynamically update attribute1Label and attribute2Label based on the product category
                     if (selectedProduct instanceof Clothing) {
-                        attribute1Label.setText("Size: " + ((Clothing) selectedProduct).getSize());
-                        attribute2Label.setText("Color: " + ((Clothing) selectedProduct).getColor());
+                        attribute1Label.setText(attribute1Label.getText() + " " + ((Clothing) selectedProduct).getSize());
+                        attribute2Label.setText(attribute2Label.getText() + " " + ((Clothing) selectedProduct).getColor());
                     } else if (selectedProduct instanceof Electronics) {
-                        attribute1Label.setText("Brand: " + ((Electronics) selectedProduct).getBrand());
-                        attribute2Label.setText("Warranty Period: " + ((Electronics) selectedProduct).getWarrantyPeriod() + " years");
+                        attribute1Label.setText(attribute1Label.getText() + " " + ((Electronics) selectedProduct).getBrand());
+                        attribute2Label.setText(attribute2Label.getText() + " " + ((Electronics) selectedProduct).getWarrantyPeriod() + " years");
                     } else {
                         attribute1Label.setText("N/A");
                         attribute2Label.setText("N/A");
