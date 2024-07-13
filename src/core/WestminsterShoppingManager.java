@@ -129,4 +129,8 @@ public class WestminsterShoppingManager implements ShoppingManager {
             }
         }
     }
+
+    public List<Product> getAllProducts() {
+        return new ArrayList<>(products.values());
+    }
 }
