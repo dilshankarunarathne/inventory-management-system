@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class ShoppingCartWindow extends JFrame {
     private JTable cartTable;
-    private JLabel totalLabel, discountLabel, finalTotalLabel;
+    private JLabel totalLabel, firstPurchaseDiscountLabel, categoryDiscountLabel, finalTotalLabel;
     private ShoppingCart cart;
 
     public ShoppingCartWindow(ShoppingCart cart) {
@@ -21,22 +21,26 @@ public class ShoppingCartWindow extends JFrame {
 
         // Cart Table
         String[] columnNames = {"Product", "Quantity", "Price"};
-        Object[][] data = getCartData(); // Method call to populate data
+        Object[][] data = getCartData();
         cartTable = new JTable(data, columnNames);
         add(new JScrollPane(cartTable), BorderLayout.CENTER);
 
-        // Total and Discounts
-        JPanel totalsPanel = new JPanel(new GridLayout(3, 2));
+        // Total and Discounts Panel
+        JPanel totalsPanel = new JPanel(new GridLayout(4, 2));
         totalsPanel.add(new JLabel("Total:"));
-        totalLabel = new JLabel(String.valueOf(cart.calculateTotalWithoutDiscount()));
+        totalLabel = new JLabel(String.format("%.2f", cart.calculateTotalWithoutDiscount()));
         totalsPanel.add(totalLabel);
 
-        totalsPanel.add(new JLabel("Discounts:"));
-        discountLabel = new JLabel(String.valueOf(cart.calculateDiscounts()));
-        totalsPanel.add(discountLabel);
+        totalsPanel.add(new JLabel("First Purchase Discount:"));
+        firstPurchaseDiscountLabel = new JLabel(String.format("%.2f", cart.calculateFirstPurchaseDiscount()));
+        totalsPanel.add(firstPurchaseDiscountLabel);
+
+        totalsPanel.add(new JLabel("Category Discount:"));
+        categoryDiscountLabel = new JLabel(String.format("%.2f", cart.calculateCategoryDiscount()));
+        totalsPanel.add(categoryDiscountLabel);
 
         totalsPanel.add(new JLabel("Final Total:"));
-        finalTotalLabel = new JLabel(String.valueOf(cart.calculateFinalTotal()));
+        finalTotalLabel = new JLabel(String.format("%.2f", cart.calculateFinalTotal()));
         totalsPanel.add(finalTotalLabel);
 
         add(totalsPanel, BorderLayout.SOUTH);
@@ -54,6 +58,7 @@ public class ShoppingCartWindow extends JFrame {
         }
         return data;
     }
+
 
     // Additional methods for updating cart and totals
 }
