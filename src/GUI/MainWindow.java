@@ -144,6 +144,7 @@ public class MainWindow extends JFrame {
         // Event Listeners
         setupListeners();
         refreshProductTable();
+        updateProductTable(getAllProducts());
     }
 
     private void addProductToCart(String productId) {
