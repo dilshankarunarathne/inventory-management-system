@@ -103,7 +103,7 @@ public class MainWindow extends JFrame {
         }
     }
 
-    public List<Product> getAllProducts() {
-        return new ArrayList<>(products.values());
+    private List<Product> getAllProducts() {
+        return westminsterShoppingManager.getAllProducts();
     }
 }
