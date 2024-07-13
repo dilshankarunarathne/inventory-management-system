@@ -46,8 +46,36 @@ public class MainWindow extends JFrame {
     }
 
     private void setupListeners() {
-        // Implement listeners for selecting products, adding to cart, and viewing cart
+        // Selecting Products
+        productTable.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && productTable.getSelectedRow() != -1) {
+                // Assuming product details are in the 4th column (index 3)
+                String details = (String) productTable.getValueAt(productTable.getSelectedRow(), 4);
+                productDetails.setText(details);
+            }
+        });
+
+        // Adding to Cart
+        addToCartButton.addActionListener(e -> {
+            int selectedRow = productTable.getSelectedRow();
+            if (selectedRow != -1) {
+                // Assuming product ID is in the 0th column
+                String productId = (String) productTable.getValueAt(selectedRow, 0);
+                // This method needs to be implemented to find a Product by its ID and add it to the cart
+                addProductToCart(productId);
+            }
+        });
+
+        // Viewing Cart
+        viewCartButton.addActionListener(e -> {
+            ShoppingCartWindow cartWindow = new ShoppingCartWindow(cart);
+            cartWindow.setVisible(true);
+        });
     }
 
-    // Additional methods for updating UI based on interactions
+    private void addProductToCart(String productId) {
+        // Find the product by productId from your product list or database
+        // For example: Product product = findProductById(productId);
+        // Then add the product to the cart: cart.addProduct(product);
+    }
 }
