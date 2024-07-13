@@ -18,7 +18,12 @@ public abstract class Product implements Serializable {
     }
 
     public String getCategory() {
-        return category;
+        if (this instanceof Electronics) {
+            return "Electronics";
+        } else if (this instanceof Clothing) {
+            return "Clothing";
+        }
+        return "Other";
     }
 
     public void setCategory(String category) {
