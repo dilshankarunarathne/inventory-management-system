@@ -6,6 +6,8 @@ import core.WestminsterShoppingManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainWindow extends JFrame {
     private JComboBox<String> categorySelector;
@@ -16,7 +18,7 @@ public class MainWindow extends JFrame {
 
     private WestminsterShoppingManager westminsterShoppingManager;
 
-    public MainWindow(ShoppingCart cart) {
+    public MainWindow(ShoppingCart cart, WestminsterShoppingManager westminsterShoppingManager) {
         super("Westminster Shopping Centre");
         this.cart = cart;
         this.westminsterShoppingManager = westminsterShoppingManager;
@@ -101,8 +103,7 @@ public class MainWindow extends JFrame {
         }
     }
 
-    private List<Product> getAllProducts() {
-        // Assuming you have a westminsterShoppingManager instance available
-        return westminsterShoppingManager.getAllProducts();
+    public List<Product> getAllProducts() {
+        return new ArrayList<>(products.values());
     }
 }
