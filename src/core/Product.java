@@ -7,14 +7,12 @@ public abstract class Product implements Serializable {
     private String productName;
     private int availableItems;
     private double price;
-    private String category;
 
     public Product(String productId, String productName, int availableItems, double price) {
         this.productId = productId;
         this.productName = productName;
         this.availableItems = availableItems;
         this.price = price;
-        this.category = category;
     }
 
     public String getCategory() {
@@ -24,10 +22,6 @@ public abstract class Product implements Serializable {
             return "Clothing";
         }
         return "Other";
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public String getProductId() {
