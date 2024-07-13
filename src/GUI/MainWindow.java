@@ -95,6 +95,20 @@ public class MainWindow extends JFrame {
         // Add the formPanel to the JFrame
         add(formPanel, BorderLayout.SOUTH);
 
+        // Step 1: Create the label and button
+        JLabel detailsLabel = new JLabel("Selected Product - Details");
+        JButton addToCartButton = new JButton("Add to Cart");
+
+        // Step 2 & 3 & 4: Create a new panel for the label, form, and button
+        JPanel detailsPanel = new JPanel(new BorderLayout());
+        detailsPanel.add(detailsLabel, BorderLayout.NORTH);
+        detailsPanel.add(formPanel, BorderLayout.CENTER); // Assuming formPanel is your existing form panel
+        detailsPanel.add(addToCartButton, BorderLayout.SOUTH);
+
+        // Step 5: Add the detailsPanel to the MainWindow
+        // Assuming you want to replace the existing formPanel in the SOUTH of the MainWindow
+        add(detailsPanel, BorderLayout.SOUTH);
+
         categorySelector.addActionListener(e -> {
             String selectedCategory = (String) categorySelector.getSelectedItem();
             List<Product> filteredProducts;
@@ -110,9 +124,29 @@ public class MainWindow extends JFrame {
             updateProductTable(filteredProducts);
         });
 
+        addToCartButton.addActionListener(e -> {
+            int selectedRow = productTable.getSelectedRow();
+            if (selectedRow != -1) {
+                String productId = (String) productTable.getValueAt(selectedRow, 0);
+                addProductToCart(productId);
+            } else {
+                JOptionPane.showMessageDialog(this, "No product selected", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
         // Event Listeners
         setupListeners();
         refreshProductTable();
+    }
+
+    private void addProductToCart(String productId) {
+        Product product = findProductById(productId);
+        if (product != null) {
+            cart.addProduct(product);
+            JOptionPane.showMessageDialog(this, "Added to cart: " + product.getProductName(), "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Product not found", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void setupListeners() {
@@ -123,7 +157,7 @@ public class MainWindow extends JFrame {
                 Product selectedProduct = findProductById(productId);
                 if (selectedProduct != null) {
                     productIdField.setText(selectedProduct.getProductId());
-                    categoryNameField.setText(selectedProduct.getCategory());
+                    categoryNameField.setText(getCategory(selectedProduct));
                     nameField.setText(selectedProduct.getProductName());
                     // Assuming size and color are attributes of Clothing and Electronics respectively
                     // You might need to adjust this logic based on your Product class structure
@@ -135,21 +169,30 @@ public class MainWindow extends JFrame {
         });
 
         // Adding to Cart
-        addToCartButton.addActionListener(e -> {
-            int selectedRow = productTable.getSelectedRow();
-            if (selectedRow != -1) {
-                // Assuming product ID is in the 0th column
-                String productId = (String) productTable.getValueAt(selectedRow, 0);
-                // This method needs to be implemented to find a Product by its ID and add it to the cart
-                addProductToCart(productId);
-            }
-        });
+//        addToCartButton.addActionListener(e -> {
+//            int selectedRow = productTable.getSelectedRow();
+//            if (selectedRow != -1) {
+//                // Assuming product ID is in the 0th column
+//                String productId = (String) productTable.getValueAt(selectedRow, 0);
+//                // This method needs to be implemented to find a Product by its ID and add it to the cart
+//                addProductToCart(productId);
+//            }
+//        });
 
         // Viewing Cart
         viewCartButton.addActionListener(e -> {
             ShoppingCartWindow cartWindow = new ShoppingCartWindow(cart);
             cartWindow.setVisible(true);
         });
+    }
+
+    private String getCategory(Product p) {
+        if (p instanceof Clothing) {
+            return "Clothing";
+        } else if (p instanceof Electronics) {
+            return "Electronics";
+        }
+        return "Unknown";
     }
 
     private void updateProductTable(List<Product> products) {
@@ -159,7 +202,7 @@ public class MainWindow extends JFrame {
             model.addRow(new Object[]{
                     product.getProductId(),
                     product.getProductName(),
-                    product.getCategory(),
+                    getCategory(product),
                     product.getPrice(),
                     product.toString() // Assuming toString() method returns the product details
             });
@@ -175,7 +218,7 @@ public class MainWindow extends JFrame {
             Product product = allProducts.get(i);
             data[i][0] = product.getProductId();
             data[i][1] = product.getProductName();
-            data[i][2] = product.getCategory();
+            data[i][2] = getCategory(product);
             data[i][3] = product.getPrice();
             // Update this line to include actual product details instead of just "Details"
             data[i][4] = product.toString(); // Assuming toString() method of Product class returns the details
@@ -197,15 +240,16 @@ public class MainWindow extends JFrame {
     }
 
     // Updated addProductToCart method
-    private void addProductToCart(String productId) {
-        Product product = findProductById(productId);
-        if (product != null) {
-            cart.addProduct(product);
-        } else {
-            // Handle the case where the product is not found
-            JOptionPane.showMessageDialog(this, "Product not found", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
+//    private void addProductToCart(String productId) {
+//        Product product = findProductById(productId);
+//        if (product != null) {
+//            cart.addProduct(product);
+//            System.out.println("Added to cart: " + product.getProductName()); // Debugging output
+//        } else {
+//            // Handle the case where the product is not found
+//            JOptionPane.showMessageDialog(this, "Product not found", "Error", JOptionPane.ERROR_MESSAGE);
+//        }
+//    }
 
     private List<Product> getAllProducts() {
         return westminsterShoppingManager.getAllProducts();
