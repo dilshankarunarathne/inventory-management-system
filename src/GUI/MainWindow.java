@@ -19,6 +19,8 @@ public class MainWindow extends JFrame {
     private JButton viewCartButton, addToCartButton;
     private ShoppingCart cart;
     private JLabel productIdLabel, categoryNameLabel, nameLabel, sizeLabel, colorLabel, itemsAvailableLabel;
+    // Declaration of dynamic attribute labels
+    private JLabel attribute1Label, attribute2Label;
 
     private WestminsterShoppingManager westminsterShoppingManager;
 
@@ -78,6 +80,9 @@ public class MainWindow extends JFrame {
         sizeLabel = new JLabel();
         colorLabel = new JLabel();
         itemsAvailableLabel = new JLabel();
+        attribute1Label = new JLabel();
+        attribute2Label = new JLabel();
+
         // Add a panel for the form
         JPanel formPanel = new JPanel(new GridLayout(6, 2));
         formPanel.add(new JLabel("Product ID:"));
@@ -86,12 +91,13 @@ public class MainWindow extends JFrame {
         formPanel.add(categoryNameLabel);
         formPanel.add(new JLabel("Name:"));
         formPanel.add(nameLabel);
-        formPanel.add(new JLabel("Size:"));
-        formPanel.add(sizeLabel);
-        formPanel.add(new JLabel("Color:"));
-        formPanel.add(colorLabel);
+        formPanel.add(new JLabel("Attribute 1:")); // Generic label, will be dynamically updated
+        formPanel.add(attribute1Label);
+        formPanel.add(new JLabel("Attribute 2:")); // Generic label, will be dynamically updated
+        formPanel.add(attribute2Label);
         formPanel.add(new JLabel("Items Available:"));
         formPanel.add(itemsAvailableLabel);
+
         // Add the formPanel to the JFrame
         add(formPanel, BorderLayout.SOUTH);
 
@@ -167,9 +173,19 @@ public class MainWindow extends JFrame {
                     productIdLabel.setText(selectedProduct.getProductId());
                     categoryNameLabel.setText(getCategory(selectedProduct));
                     nameLabel.setText(selectedProduct.getProductName());
-                    sizeLabel.setText(selectedProduct instanceof Clothing ? ((Clothing) selectedProduct).getSize() : "N/A");
-                    colorLabel.setText(selectedProduct instanceof Electronics ? ((Electronics) selectedProduct).getColor() : "N/A");
                     itemsAvailableLabel.setText(String.valueOf(selectedProduct.getAvailableItems()));
+
+                    // Dynamically update attribute1Label and attribute2Label based on the product category
+                    if (selectedProduct instanceof Clothing) {
+                        attribute1Label.setText("Size: " + ((Clothing) selectedProduct).getSize());
+                        attribute2Label.setText("Color: " + ((Clothing) selectedProduct).getColor());
+                    } else if (selectedProduct instanceof Electronics) {
+                        attribute1Label.setText("Brand: " + ((Electronics) selectedProduct).getBrand());
+                        attribute2Label.setText("Warranty Period: " + ((Electronics) selectedProduct).getWarrantyPeriod() + " years");
+                    } else {
+                        attribute1Label.setText("N/A");
+                        attribute2Label.setText("N/A");
+                    }
                 }
             }
         });
