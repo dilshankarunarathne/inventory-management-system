@@ -18,7 +18,7 @@ public class MainWindow extends JFrame {
     private JTable productTable;
     private JButton viewCartButton, addToCartButton;
     private ShoppingCart cart;
-    private JTextField productIdField, categoryNameField, nameField, sizeField, colorField, itemsAvailableField;
+    private JLabel productIdLabel, categoryNameLabel, nameLabel, sizeLabel, colorLabel, itemsAvailableLabel;
 
     private WestminsterShoppingManager westminsterShoppingManager;
 
@@ -72,26 +72,26 @@ public class MainWindow extends JFrame {
         // Add the topPanel to the JFrame
         add(topPanel, BorderLayout.NORTH);
 
-        productIdField = new JTextField(10);
-        categoryNameField = new JTextField(10);
-        nameField = new JTextField(10);
-        sizeField = new JTextField(10);
-        colorField = new JTextField(10);
-        itemsAvailableField = new JTextField(10);
+        productIdLabel = new JLabel();
+        categoryNameLabel = new JLabel();
+        nameLabel = new JLabel();
+        sizeLabel = new JLabel();
+        colorLabel = new JLabel();
+        itemsAvailableLabel = new JLabel();
         // Add a panel for the form
         JPanel formPanel = new JPanel(new GridLayout(6, 2));
         formPanel.add(new JLabel("Product ID:"));
-        formPanel.add(productIdField);
+        formPanel.add(productIdLabel);
         formPanel.add(new JLabel("Category:"));
-        formPanel.add(categoryNameField);
+        formPanel.add(categoryNameLabel);
         formPanel.add(new JLabel("Name:"));
-        formPanel.add(nameField);
+        formPanel.add(nameLabel);
         formPanel.add(new JLabel("Size:"));
-        formPanel.add(sizeField);
+        formPanel.add(sizeLabel);
         formPanel.add(new JLabel("Color:"));
-        formPanel.add(colorField);
+        formPanel.add(colorLabel);
         formPanel.add(new JLabel("Items Available:"));
-        formPanel.add(itemsAvailableField);
+        formPanel.add(itemsAvailableLabel);
         // Add the formPanel to the JFrame
         add(formPanel, BorderLayout.SOUTH);
 
@@ -164,14 +164,12 @@ public class MainWindow extends JFrame {
                 String productId = (String) productTable.getValueAt(productTable.getSelectedRow(), 0);
                 Product selectedProduct = findProductById(productId);
                 if (selectedProduct != null) {
-                    productIdField.setText(selectedProduct.getProductId());
-                    categoryNameField.setText(getCategory(selectedProduct));
-                    nameField.setText(selectedProduct.getProductName());
-                    // Assuming size and color are attributes of Clothing and Electronics respectively
-                    // You might need to adjust this logic based on your Product class structure
-                    sizeField.setText(selectedProduct instanceof Clothing ? ((Clothing) selectedProduct).getSize() : "");
-                    colorField.setText(selectedProduct instanceof Clothing ? ((Clothing) selectedProduct).getColor() : "");
-                    itemsAvailableField.setText(String.valueOf(selectedProduct.getAvailableItems()));
+                    productIdLabel.setText(selectedProduct.getProductId());
+                    categoryNameLabel.setText(getCategory(selectedProduct));
+                    nameLabel.setText(selectedProduct.getProductName());
+                    sizeLabel.setText(selectedProduct instanceof Clothing ? ((Clothing) selectedProduct).getSize() : "N/A");
+                    colorLabel.setText(selectedProduct instanceof Electronics ? ((Electronics) selectedProduct).getColor() : "N/A");
+                    itemsAvailableLabel.setText(String.valueOf(selectedProduct.getAvailableItems()));
                 }
             }
         });
