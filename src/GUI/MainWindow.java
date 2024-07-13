@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -40,6 +41,16 @@ public class MainWindow extends JFrame {
         productTable = new JTable(data, columnNames);
         add(new JScrollPane(productTable), BorderLayout.CENTER);
 
+        JLabel categoryLabel = new JLabel("Select Product Category");
+
+        // Step 2: Add the label and categorySelector to a panel for proper alignment
+        JPanel categoryPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        categoryPanel.add(categoryLabel);
+        categoryPanel.add(categorySelector);
+
+        // Replace the direct addition of categorySelector with the addition of categoryPanel
+        add(categoryPanel, BorderLayout.NORTH);
+
         // Add to Cart Button
         addToCartButton = new JButton("Add to Shopping Cart");
         add(addToCartButton, BorderLayout.SOUTH);
@@ -70,6 +81,19 @@ public class MainWindow extends JFrame {
         formPanel.add(itemsAvailableField);
         // Add the formPanel to the JFrame
         add(formPanel, BorderLayout.SOUTH);
+
+        categorySelector.addActionListener(e -> {
+            String selectedCategory = (String) categorySelector.getSelectedItem();
+            List<Product> filteredProducts;
+            if ("All".equals(selectedCategory)) {
+                filteredProducts = getAllProducts();
+            } else {
+                filteredProducts = getAllProducts().stream()
+                        .filter(product -> product.getCategory().equals(selectedCategory))
+                        .collect(Collectors.toList());
+            }
+            updateProductTable(filteredProducts);
+        });
 
         // Event Listeners
         setupListeners();
@@ -111,6 +135,20 @@ public class MainWindow extends JFrame {
             ShoppingCartWindow cartWindow = new ShoppingCartWindow(cart);
             cartWindow.setVisible(true);
         });
+    }
+
+    private void updateProductTable(List<Product> products) {
+        DefaultTableModel model = (DefaultTableModel) productTable.getModel();
+        model.setRowCount(0); // Clear existing rows
+        for (Product product : products) {
+            model.addRow(new Object[]{
+                    product.getProductId(),
+                    product.getProductName(),
+                    product.getCategory(),
+                    product.getPrice(),
+                    product.toString() // Assuming toString() method returns the product details
+            });
+        }
     }
 
     private void refreshProductTable() {
