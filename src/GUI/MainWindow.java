@@ -28,9 +28,9 @@ public class MainWindow extends JFrame {
 
     private WestminsterShoppingManager westminsterShoppingManager;
 
-    public MainWindow(WestminsterShoppingManager westminsterShoppingManager) {
+    public MainWindow(ShoppingCart cart, WestminsterShoppingManager westminsterShoppingManager) {
         super("Westminster Shopping Centre");
-        this.cart = cart;
+        this.cart = cart; // Initialize the cart field with the provided ShoppingCart instance
         this.westminsterShoppingManager = westminsterShoppingManager;
         initializeUI();
         setupListeners();
@@ -40,6 +40,10 @@ public class MainWindow extends JFrame {
         setSize(600, 400);
         setLayout(new FlowLayout());
 
+        // Initialize productTable here
+        productTable = new JTable(); // Add necessary table model initialization if needed
+
+        // Initialize other UI components
         productIdField = new JTextField(10);
         productNameField = new JTextField(10);
         availableItemsField = new JTextField(5);
@@ -52,6 +56,7 @@ public class MainWindow extends JFrame {
         productTypeComboBox = new JComboBox<>(new String[]{"Electronics", "Clothing"});
         addButton = new JButton("Add Product");
 
+        // Add components to the layout
         add(new JLabel("Type:"));
         add(productTypeComboBox);
         add(new JLabel("Product ID:"));
@@ -66,6 +71,7 @@ public class MainWindow extends JFrame {
 
         add(addButton);
 
+        // Ensure this is called after all components, including productTable, are initialized
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
