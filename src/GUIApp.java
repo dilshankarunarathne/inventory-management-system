@@ -1,10 +1,12 @@
 import GUI.MainWindow;
 import core.ShoppingCart;
+import core.WestminsterShoppingManager;
 
 public class GUIApp {
     public static void main(String[] args) {
         ShoppingCart cart = new ShoppingCart();
-        MainWindow window = new MainWindow(cart);
+        WestminsterShoppingManager manager = new WestminsterShoppingManager();
+        MainWindow window = new MainWindow(cart, manager);
         window.setVisible(true);
     }
 }
