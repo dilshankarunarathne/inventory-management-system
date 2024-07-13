@@ -205,21 +205,10 @@ public class MainWindow extends JFrame {
             });
         }
 
-        productTable.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                String productId = (String) table.getValueAt(row, 0); // Assuming product ID is in the first column
-                Product product = findProductById(productId);
-                if (product != null && product.getAvailableItems() < 3) {
-                    c.setForeground(Color.WHITE); // Text color
-                    c.setBackground(Color.RED); // Background color
-                } else {
-                    c.setForeground(Color.BLACK); // Default text color
-                    c.setBackground(Color.WHITE); // Default background
-                }
-                return c;
-            }});
+        AvailabilityCellRenderer availabilityRenderer = new AvailabilityCellRenderer(getAllProducts());
+        for (int i = 0; i < productTable.getColumnCount(); i++) {
+            productTable.getColumnModel().getColumn(i).setCellRenderer(availabilityRenderer);
+        }
     }
 
     private void refreshProductTable() {
