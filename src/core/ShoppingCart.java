@@ -58,6 +58,22 @@ public class ShoppingCart {
         return categoryCounts;
     }
 
+    public double calculateTotalWithoutDiscount() {
+        double total = 0;
+        for (Product product : products) {
+            total += product.getPrice();
+        }
+        return total;
+    }
+
+    public Map<Product, Integer> getItems() {
+        Map<Product, Integer> itemsWithQuantities = new HashMap<>();
+        for (Product product : products) {
+            itemsWithQuantities.put(product, itemsWithQuantities.getOrDefault(product, 0) + 1);
+        }
+        return itemsWithQuantities;
+    }
+
     public List<Product> getProducts() {
         return products;
     }
