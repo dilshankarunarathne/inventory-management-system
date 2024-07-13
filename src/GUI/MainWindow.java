@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 public class MainWindow extends JFrame {
     private JComboBox<String> categorySelector;
@@ -55,6 +57,8 @@ public class MainWindow extends JFrame {
         // View Cart Button
         viewCartButton = new JButton("View Shopping Cart");
 //        add(viewCartButton, BorderLayout.EAST);
+
+        productTable.setAutoCreateRowSorter(true);
 
         // Create a new JPanel to hold the label, category selector, and view cart button
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -133,6 +137,13 @@ public class MainWindow extends JFrame {
                 JOptionPane.showMessageDialog(this, "No product selected", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
+
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(productTable.getModel());
+        productTable.setRowSorter(sorter);
+        List<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING)); // Column index 1 for "Name"
+        sorter.setSortKeys(sortKeys);
+        sorter.sort();
 
         // Event Listeners
         setupListeners();
