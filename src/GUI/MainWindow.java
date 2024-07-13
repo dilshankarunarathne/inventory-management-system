@@ -1,6 +1,8 @@
 package GUI;
 
+import core.Product;
 import core.ShoppingCart;
+import core.WestminsterShoppingManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,9 +14,13 @@ public class MainWindow extends JFrame {
     private JButton viewCartButton, addToCartButton;
     private ShoppingCart cart;
 
+    private WestminsterShoppingManager westminsterShoppingManager;
+
     public MainWindow(ShoppingCart cart) {
         super("Westminster Shopping Centre");
         this.cart = cart;
+        this.westminsterShoppingManager = westminsterShoppingManager;
+
         setSize(800, 600);
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,9 +79,30 @@ public class MainWindow extends JFrame {
         });
     }
 
+    // Method to find a Product by its ID
+    private Product findProductById(String productId) {
+        // Assuming getAllProducts() returns a List<Product> of all available products
+        for (Product product : getAllProducts()) {
+            if (product.getProductId().equals(productId)) {
+                return product;
+            }
+        }
+        return null; // or throw an exception if the product is not found
+    }
+
+    // Updated addProductToCart method
     private void addProductToCart(String productId) {
-        // Find the product by productId from your product list or database
-        // For example: Product product = findProductById(productId);
-        // Then add the product to the cart: cart.addProduct(product);
+        Product product = findProductById(productId);
+        if (product != null) {
+            cart.addProduct(product);
+        } else {
+            // Handle the case where the product is not found
+            JOptionPane.showMessageDialog(this, "Product not found", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private List<Product> getAllProducts() {
+        // Assuming you have a westminsterShoppingManager instance available
+        return westminsterShoppingManager.getAllProducts();
     }
 }
