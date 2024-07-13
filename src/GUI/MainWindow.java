@@ -89,7 +89,7 @@ public class MainWindow extends JFrame {
                 filteredProducts = getAllProducts();
             } else {
                 filteredProducts = getAllProducts().stream()
-                        .filter(product -> product.getCategory().equals(selectedCategory))
+                        .filter(product -> product.getCategory() != null && product.getCategory().equals(selectedCategory))
                         .collect(Collectors.toList());
             }
             updateProductTable(filteredProducts);
