@@ -208,18 +208,20 @@ public class MainWindow extends JFrame {
         productTable.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 String productId = (String) table.getValueAt(row, 0); // Assuming product ID is in the first column
                 Product product = findProductById(productId);
-                assert product != null;
-                System.out.println(product.getAvailableItems());
-                if (product.getAvailableItems() < 3) {
-                    System.out.println("Changing color: RED");
-                    c.setForeground(Color.RED);
+                if (product != null && product.getAvailableItems() < 3) {
+                    label.setForeground(Color.RED); // Text color
+                    label.setBackground(new Color(255, 220, 220)); // Light red background
                 } else {
-                    c.setForeground(Color.BLACK);
+                    label.setForeground(Color.BLACK); // Default text color
+                    label.setBackground(Color.WHITE); // Default background
                 }
-                return c;
+                if (!isSelected) {
+                    label.setOpaque(true); // Ensure the component is opaque to show the background color
+                }
+                return label;
             }
         });
     }
