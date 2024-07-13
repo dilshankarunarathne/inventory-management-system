@@ -40,10 +40,10 @@ public class MainWindow extends JFrame {
         setSize(600, 400);
         setLayout(new FlowLayout());
 
-        // Initialize productTable here
+        // Initialize productTable
         productTable = new JTable(); // Add necessary table model initialization if needed
 
-        // Initialize other UI components
+        // Initialize UI components
         productIdField = new JTextField(10);
         productNameField = new JTextField(10);
         availableItemsField = new JTextField(5);
@@ -55,6 +55,7 @@ public class MainWindow extends JFrame {
 
         productTypeComboBox = new JComboBox<>(new String[]{"Electronics", "Clothing"});
         addButton = new JButton("Add Product");
+        addToCartButton = new JButton("Add to Cart"); // Initialize addToCartButton here
 
         // Add components to the layout
         add(new JLabel("Type:"));
@@ -67,11 +68,10 @@ public class MainWindow extends JFrame {
         add(availableItemsField);
         add(new JLabel("Price:"));
         add(priceField);
-        // Add more fields based on the selected product type dynamically if needed
-
         add(addButton);
+        add(addToCartButton); // Add addToCartButton to the layout
 
-        // Ensure this is called after all components, including productTable, are initialized
+        // Ensure this is called after all components, including addToCartButton, are initialized
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
