@@ -29,8 +29,11 @@ public class MainWindow extends JFrame {
     private WestminsterShoppingManager westminsterShoppingManager;
 
     public MainWindow(WestminsterShoppingManager westminsterShoppingManager) {
+        super("Westminster Shopping Centre");
+        this.cart = cart;
         this.westminsterShoppingManager = westminsterShoppingManager;
         initializeUI();
+        setupListeners();
     }
 
     private void initializeUI() {
