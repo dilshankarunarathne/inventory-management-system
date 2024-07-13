@@ -54,7 +54,7 @@ public class MainWindow extends JFrame {
 
         // View Cart Button
         viewCartButton = new JButton("View Shopping Cart");
-        add(viewCartButton, BorderLayout.EAST);
+//        add(viewCartButton, BorderLayout.EAST);
 
         // Create a new JPanel to hold the label, category selector, and view cart button
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
