@@ -6,8 +6,13 @@ import core.WestminsterShoppingManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+
+import core.Electronics;
+import core.Clothing;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -17,44 +22,73 @@ public class MainWindow extends JFrame {
     private JTextArea productDetails;
     private JButton viewCartButton, addToCartButton;
     private ShoppingCart cart;
+    private JButton addButton;
+    private JComboBox<String> productTypeComboBox;
+    private JTextField productIdField, productNameField, availableItemsField, priceField, brandField, warrantyPeriodField, sizeField, colorField;
 
     private WestminsterShoppingManager westminsterShoppingManager;
 
-    public MainWindow(ShoppingCart cart, WestminsterShoppingManager westminsterShoppingManager) {
-        super("Westminster Shopping Centre");
-        this.cart = cart;
+    public MainWindow(WestminsterShoppingManager westminsterShoppingManager) {
         this.westminsterShoppingManager = westminsterShoppingManager;
-
-        setSize(800, 600);
-        setLayout(new BorderLayout());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Category Selector
-        categorySelector = new JComboBox<>(new String[]{"All", "Electronics", "Clothing"});
-        add(categorySelector, BorderLayout.NORTH);
-
-        // Product Table
-        String[] columnNames = {"Product ID", "Name", "Category", "Price", "Info"};
-        Object[][] data = {}; // Populate with product data
-        productTable = new JTable(data, columnNames);
-        add(new JScrollPane(productTable), BorderLayout.CENTER);
-
-        // Product Details
-        productDetails = new JTextArea(5, 20);
-        add(productDetails, BorderLayout.SOUTH);
-
-        // Add to Cart Button
-        addToCartButton = new JButton("Add to Shopping Cart");
-        add(addToCartButton, BorderLayout.SOUTH);
-
-        // View Cart Button
-        viewCartButton = new JButton("View Shopping Cart");
-        add(viewCartButton, BorderLayout.EAST);
-
-        // Event Listeners
-        setupListeners();
-        refreshProductTable();
+        initializeUI();
     }
+
+    private void initializeUI() {
+        setSize(600, 400);
+        setLayout(new FlowLayout());
+
+        productIdField = new JTextField(10);
+        productNameField = new JTextField(10);
+        availableItemsField = new JTextField(5);
+        priceField = new JTextField(5);
+        brandField = new JTextField(10);
+        warrantyPeriodField = new JTextField(5);
+        sizeField = new JTextField(5);
+        colorField = new JTextField(10);
+
+        productTypeComboBox = new JComboBox<>(new String[]{"Electronics", "Clothing"});
+        addButton = new JButton("Add Product");
+
+        add(new JLabel("Type:"));
+        add(productTypeComboBox);
+        add(new JLabel("Product ID:"));
+        add(productIdField);
+        add(new JLabel("Name:"));
+        add(productNameField);
+        add(new JLabel("Available Items:"));
+        add(availableItemsField);
+        add(new JLabel("Price:"));
+        add(priceField);
+        // Add more fields based on the selected product type dynamically if needed
+
+        add(addButton);
+
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addProduct();
+            }
+        });
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    private void addProduct() {
+        String type = (String) productTypeComboBox.getSelectedItem();
+        String productId = productIdField.getText();
+        String productName = productNameField.getText();
+        int availableItems = Integer.parseInt(availableItemsField.getText());
+        double price = Double.parseDouble(priceField.getText());
+        String brandOrSize = type.equals("Electronics") ? brandField.getText() : sizeField.getText();
+        String warrantyPeriodOrColor = type.equals("Electronics") ? warrantyPeriodField.getText() : colorField.getText();
+
+        // Now, call the addProduct method with all the required parameters
+        westminsterShoppingManager.addProduct(type, productId, productName, availableItems, price, brandOrSize, warrantyPeriodOrColor);
+        JOptionPane.showMessageDialog(this, "Product added successfully.");
+        // Optionally, refresh the product list display here
+    }
+
 
     private void setupListeners() {
         // Selecting Products
