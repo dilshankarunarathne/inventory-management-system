@@ -1,9 +1,6 @@
 package GUI;
 
-import core.Clothing;
-import core.Product;
-import core.ShoppingCart;
-import core.WestminsterShoppingManager;
+import core.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +30,7 @@ public class MainWindow extends JFrame {
 
         // Category Selector
         categorySelector = new JComboBox<>(new String[]{"All", "Electronics", "Clothing"});
-        add(categorySelector, BorderLayout.NORTH);
+//        add(categorySelector, BorderLayout.NORTH);
 
         // Product Table
         String[] columnNames = {"Product ID", "Name", "Category", "Price", "Info"};
@@ -49,7 +46,7 @@ public class MainWindow extends JFrame {
         categoryPanel.add(categorySelector);
 
         // Replace the direct addition of categorySelector with the addition of categoryPanel
-        add(categoryPanel, BorderLayout.NORTH);
+//        add(categoryPanel, BorderLayout.NORTH);
 
         // Add to Cart Button
         addToCartButton = new JButton("Add to Shopping Cart");
@@ -58,6 +55,22 @@ public class MainWindow extends JFrame {
         // View Cart Button
         viewCartButton = new JButton("View Shopping Cart");
         add(viewCartButton, BorderLayout.EAST);
+
+        // Create a new JPanel to hold the label, category selector, and view cart button
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        // Add the category label and category selector to the panel
+        topPanel.add(categoryLabel);
+        topPanel.add(categorySelector);
+
+        // Initialize the viewCartButton if not already done
+        viewCartButton = new JButton("View Shopping Cart");
+
+        // Add the viewCartButton to the panel
+        topPanel.add(viewCartButton);
+
+        // Add the topPanel to the JFrame
+        add(topPanel, BorderLayout.NORTH);
 
         productIdField = new JTextField(10);
         categoryNameField = new JTextField(10);
@@ -88,8 +101,10 @@ public class MainWindow extends JFrame {
             if ("All".equals(selectedCategory)) {
                 filteredProducts = getAllProducts();
             } else {
+                // todo simplify this logic
                 filteredProducts = getAllProducts().stream()
-                        .filter(product -> product.getCategory() != null && product.getCategory().equals(selectedCategory))
+                        .filter(product -> product instanceof Clothing && "Clothing".equals(selectedCategory)
+                                || product instanceof Electronics && "Electronics".equals(selectedCategory))
                         .collect(Collectors.toList());
             }
             updateProductTable(filteredProducts);
