@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -32,7 +33,6 @@ public class MainWindow extends JFrame {
 
         // Category Selector
         categorySelector = new JComboBox<>(new String[]{"All", "Electronics", "Clothing"});
-//        add(categorySelector, BorderLayout.NORTH);
 
         // Product Table
         String[] columnNames = {"Product ID", "Name", "Category", "Price", "Info"};
@@ -47,16 +47,12 @@ public class MainWindow extends JFrame {
         categoryPanel.add(categoryLabel);
         categoryPanel.add(categorySelector);
 
-        // Replace the direct addition of categorySelector with the addition of categoryPanel
-//        add(categoryPanel, BorderLayout.NORTH);
-
         // Add to Cart Button
         addToCartButton = new JButton("Add to Shopping Cart");
         add(addToCartButton, BorderLayout.SOUTH);
 
         // View Cart Button
         viewCartButton = new JButton("View Shopping Cart");
-//        add(viewCartButton, BorderLayout.EAST);
 
         productTable.setAutoCreateRowSorter(true);
 
@@ -179,17 +175,6 @@ public class MainWindow extends JFrame {
             }
         });
 
-        // Adding to Cart
-//        addToCartButton.addActionListener(e -> {
-//            int selectedRow = productTable.getSelectedRow();
-//            if (selectedRow != -1) {
-//                // Assuming product ID is in the 0th column
-//                String productId = (String) productTable.getValueAt(selectedRow, 0);
-//                // This method needs to be implemented to find a Product by its ID and add it to the cart
-//                addProductToCart(productId);
-//            }
-//        });
-
         // Viewing Cart
         viewCartButton.addActionListener(e -> {
             ShoppingCartWindow cartWindow = new ShoppingCartWindow(cart);
@@ -218,6 +203,24 @@ public class MainWindow extends JFrame {
                     product.toString() // Assuming toString() method returns the product details
             });
         }
+
+        productTable.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                String productId = (String) table.getValueAt(row, 0); // Assuming product ID is in the first column
+                Product product = findProductById(productId);
+                assert product != null;
+                System.out.println(product.getAvailableItems());
+                if (product.getAvailableItems() < 3) {
+                    System.out.println("Changing color: RED");
+                    c.setForeground(Color.RED);
+                } else {
+                    c.setForeground(Color.BLACK);
+                }
+                return c;
+            }
+        });
     }
 
     private void refreshProductTable() {
@@ -249,18 +252,6 @@ public class MainWindow extends JFrame {
         }
         return null; // or throw an exception if the product is not found
     }
-
-    // Updated addProductToCart method
-//    private void addProductToCart(String productId) {
-//        Product product = findProductById(productId);
-//        if (product != null) {
-//            cart.addProduct(product);
-//            System.out.println("Added to cart: " + product.getProductName()); // Debugging output
-//        } else {
-//            // Handle the case where the product is not found
-//            JOptionPane.showMessageDialog(this, "Product not found", "Error", JOptionPane.ERROR_MESSAGE);
-//        }
-//    }
 
     private List<Product> getAllProducts() {
         return westminsterShoppingManager.getAllProducts();
