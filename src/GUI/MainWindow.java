@@ -59,6 +59,13 @@ public class MainWindow extends JFrame {
         productTable = new JTable(data, columnNames);
         add(new JScrollPane(productTable), BorderLayout.CENTER);
 
+        JPanel tablePanel = new JPanel(new BorderLayout());
+        JScrollPane scrollPane = new JScrollPane(productTable);
+        tablePanel.add(scrollPane, BorderLayout.CENTER);
+        int top = 10, left = 30, bottom = 20, right = 30;
+        tablePanel.setBorder(BorderFactory.createEmptyBorder(top, left, bottom, right));
+        add(tablePanel, BorderLayout.CENTER);
+
         addToCartButton = new JButton("Add to Shopping Cart");
         add(addToCartButton, BorderLayout.SOUTH);
 
