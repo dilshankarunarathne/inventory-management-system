@@ -25,7 +25,7 @@ public class UserManager {
         try (Scanner scanner = new Scanner(new File(usersFilePath))) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                if (!line.trim().isEmpty()) { // Ensure the line is not empty
+                if (!line.trim().isEmpty()) {
                     String[] userData = line.split(",");
                     if (userData.length > 1 && userData[0].equals(username) && userData[1].equals(password)) {
                         return true; // Login successful
@@ -42,10 +42,10 @@ public class UserManager {
         try (Scanner scanner = new Scanner(new File(usersFilePath))) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                if (!line.trim().isEmpty()) { // Check if the line is not empty
+                if (!line.trim().isEmpty()) {
                     String[] userData = line.split(",");
-                    if (userData.length > 1 && userData[0].equals(username)) { // Check if userData array has elements before accessing
-                        return true; // User exists
+                    if (userData.length > 1 && userData[0].equals(username)) {
+                        return true;
                     }
                 }
             }
