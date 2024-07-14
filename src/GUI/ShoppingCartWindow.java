@@ -18,15 +18,15 @@ public class ShoppingCartWindow extends JFrame {
     public ShoppingCartWindow(ShoppingCart cart) {
         super("Shopping Cart");
         this.cart = cart;
-        setSize(400, 300);
+        setSize(600, 300);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Overall padding
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         // Cart Table with padding
         JPanel tablePanel = new JPanel(new BorderLayout());
-        tablePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Padding around the table
+        tablePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         String[] columnNames = {"Product", "Quantity", "Price"};
         Object[][] data = getCartData();
         cartTable = new JTable(data, columnNames);
@@ -34,7 +34,7 @@ public class ShoppingCartWindow extends JFrame {
 
         // Total and Discounts Panel with padding
         JPanel totalsWrapperPanel = new JPanel(new BorderLayout());
-        totalsWrapperPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Padding around the totals
+        totalsWrapperPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         JPanel totalsPanel = new JPanel(new GridLayout(4, 2));
 
         JLabel totalTextLabel = new JLabel("Total");
@@ -44,14 +44,14 @@ public class ShoppingCartWindow extends JFrame {
         totalLabel.setHorizontalAlignment(JLabel.LEFT);
         totalsPanel.add(totalLabel);
 
-        JLabel firstPurchaseDiscountTextLabel = new JLabel("First Purchase Discount");
+        JLabel firstPurchaseDiscountTextLabel = new JLabel("First Purchase Discount (10%)");
         firstPurchaseDiscountTextLabel.setHorizontalAlignment(JLabel.RIGHT);
         totalsPanel.add(firstPurchaseDiscountTextLabel);
         firstPurchaseDiscountLabel = new JLabel("    - " + String.format("%.2f", cart.calculateFirstPurchaseDiscount()) + " £");
         firstPurchaseDiscountLabel.setHorizontalAlignment(JLabel.LEFT);
         totalsPanel.add(firstPurchaseDiscountLabel);
 
-        JLabel categoryDiscountTextLabel = new JLabel("Category Discount");
+        JLabel categoryDiscountTextLabel = new JLabel("Three Items in same Category Discount (20%)");
         categoryDiscountTextLabel.setHorizontalAlignment(JLabel.RIGHT);
         totalsPanel.add(categoryDiscountTextLabel);
         categoryDiscountLabel = new JLabel("    - " + String.format("%.2f", cart.calculateCategoryDiscount()) + " £");
@@ -67,11 +67,9 @@ public class ShoppingCartWindow extends JFrame {
 
         totalsWrapperPanel.add(totalsPanel, BorderLayout.CENTER);
 
-        // Adding wrapped components to main panel
         mainPanel.add(tablePanel, BorderLayout.CENTER);
         mainPanel.add(totalsWrapperPanel, BorderLayout.SOUTH);
 
-        // Set the main panel as the content pane
         setContentPane(mainPanel);
     }
 
@@ -87,7 +85,4 @@ public class ShoppingCartWindow extends JFrame {
         }
         return data;
     }
-
-
-    // Additional methods for updating cart and totals
 }
