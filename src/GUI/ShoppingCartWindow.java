@@ -53,6 +53,7 @@ public class ShoppingCartWindow extends JFrame {
         firstPurchaseDiscountLabel.setHorizontalAlignment(JLabel.LEFT);
         totalsPanel.add(firstPurchaseDiscountLabel);
 
+        // Category Discount
         JLabel categoryDiscountTextLabel = new JLabel("Three Items in same Category Discount (20%)");
         categoryDiscountTextLabel.setHorizontalAlignment(JLabel.RIGHT);
         totalsPanel.add(categoryDiscountTextLabel);
