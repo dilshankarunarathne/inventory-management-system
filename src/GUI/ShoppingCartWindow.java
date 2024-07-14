@@ -61,6 +61,7 @@ public class ShoppingCartWindow extends JFrame {
         categoryDiscountLabel.setHorizontalAlignment(JLabel.LEFT);
         totalsPanel.add(categoryDiscountLabel);
 
+        // Final Total
         JLabel finalTotalTextLabel = new JLabel("Final Total");
         finalTotalTextLabel.setHorizontalAlignment(JLabel.RIGHT);
         totalsPanel.add(finalTotalTextLabel);
