@@ -122,6 +122,7 @@ public class WestminsterShoppingManager implements ShoppingManager {
         }
     }
 
+    // Load products from file
     @SuppressWarnings("unchecked")
     public void loadProducts() {
         File file = new File(PRODUCTS_FILE);
