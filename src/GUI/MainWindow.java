@@ -237,7 +237,7 @@ public class MainWindow extends JFrame {
         } else if (product instanceof Electronics) {
             return "Electronics";
         }
-        return "Unknown";
+        return "No details were found";
     }
 
     private void refreshProductTable() {
