@@ -242,6 +242,7 @@ public class MainWindow extends JFrame {
         return "No details were found";
     }
 
+    // Refresh the product table with all products
     private void refreshProductTable() {
         List<Product> allProducts = getAllProducts();
         String[] columnNames = {"Product ID", "Name", "Category", "Price", "Info"};
