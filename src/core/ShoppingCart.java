@@ -76,6 +76,7 @@ public class ShoppingCart {
         return itemsWithQuantities;
     }
 
+    // Get the categories of the products in the cart
     public List<Product> getProducts() {
         return products;
     }
