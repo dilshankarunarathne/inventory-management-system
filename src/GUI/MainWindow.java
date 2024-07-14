@@ -50,6 +50,7 @@ public class MainWindow extends JFrame {
         topPanel.add(categoryLabel);
         topPanel.add(categorySelector);
         viewCartButton = new JButton("View Shopping Cart");
+        topPanel.add(Box.createRigidArea(new Dimension(200, 0)));
         topPanel.add(viewCartButton);
         add(topPanel, BorderLayout.NORTH);
 
