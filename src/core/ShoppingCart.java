@@ -16,15 +16,15 @@ public class ShoppingCart {
     public ShoppingCart(User user) {
         this.products = new ArrayList<>();
         this.user = user;
-        this.isFirstPurchase = !user.isFirstOrderDone(); // Use the getter from User
+        this.isFirstPurchase = !user.isFirstOrderDone();
     }
 
     // Add products to the cart
     public void addProduct(Product product) {
         products.add(product);
         if (!user.isFirstOrderDone()) {
-            user.setFirstOrderDone(true); // Set firstOrderDone to true
-            saveUserData(); // Save the user data
+            user.setFirstOrderDone(true);
+            saveUserData();
         }
     }
 
@@ -57,8 +57,7 @@ public class ShoppingCart {
         double total = calculateTotalWithoutDiscount();
         if (!user.isFirstOrderDone()) {
             total -= calculateFirstPurchaseDiscount();
-            user.setFirstOrderDone(true); // Set firstOrderDone to true
-            // Save the user data here
+            user.setFirstOrderDone(true);
         }
         total -= calculateCategoryDiscount();
         return total;
@@ -85,6 +84,6 @@ public class ShoppingCart {
 
     private void saveUserData() {
         UserManager userManager = new UserManager();
-        userManager.updateUser(this.user); // Update the user data in the file
+        userManager.updateUser(this.user);
     }
 }

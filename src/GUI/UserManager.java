@@ -16,7 +16,7 @@ public class UserManager {
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
             out.println(username + "," + password);
-            return new User(username, password, false); // Return new User object
+            return new User(username, password, false);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -31,7 +31,7 @@ public class UserManager {
                     String[] userData = line.split(",");
                     if (userData[0].equals(username) && userData[1].equals(password)) {
                         boolean firstOrderDone = userData.length > 2 && Boolean.parseBoolean(userData[2]);
-                        return new User(username, password, firstOrderDone); // Return User object with firstOrderDone status
+                        return new User(username, password, firstOrderDone);
                     }
                 }
             }
@@ -78,6 +78,7 @@ public class UserManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         // Replace the old file with the updated file
         new File(usersFilePath).delete();
         tempFile.renameTo(new File(usersFilePath));
