@@ -162,7 +162,7 @@ public class MainWindow extends JFrame {
             attribute1NameLabel.setText("Brand:");
             attribute2NameLabel.setText("Warranty Period:");
             attribute1Label.setText(((Electronics) selectedProduct).getBrand());
-            attribute2Label.setText(((Electronics) selectedProduct).getWarrantyPeriod() + " years");
+            attribute2Label.setText(((Electronics) selectedProduct).getWarrantyPeriod() + " weeks");
         } else {
             attribute1NameLabel.setText("N/A");
             attribute2NameLabel.setText("N/A");
