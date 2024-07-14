@@ -233,9 +233,9 @@ public class MainWindow extends JFrame {
 
     private String getDetails(Product product) {
         if (product instanceof Clothing) {
-            return "Clothing";
+            return ((Clothing) product).getSize() + ", " + ((Clothing) product).getColor();
         } else if (product instanceof Electronics) {
-            return "Electronics";
+            return ((Electronics) product).getBrand() + ", " + ((Electronics) product).getWarrantyPeriod() + " weeks warranty";
         }
         return "No details were found";
     }
