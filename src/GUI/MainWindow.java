@@ -180,6 +180,7 @@ public class MainWindow extends JFrame {
         }
     }
 
+    // Setup listeners for the UI components
     private void setupListeners() {
         productTable.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && productTable.getSelectedRow() != -1) {
