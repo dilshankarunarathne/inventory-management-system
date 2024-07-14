@@ -38,6 +38,7 @@ public class MainWindow extends JFrame {
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // Top panel
         categorySelector = new JComboBox<>(new String[]{"All", "Electronics", "Clothing"});
         JLabel categoryLabel = new JLabel("Select Product Category");
         JPanel categoryPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -47,16 +48,15 @@ public class MainWindow extends JFrame {
         JPanel topPanel = new JPanel();
         topPanel.add(categoryLabel);
         topPanel.add(categorySelector);
-        viewCartButton = new JButton("View Shopping Cart");
         topPanel.add(Box.createRigidArea(new Dimension(200, 0)));
         topPanel.add(viewCartButton);
         add(topPanel, BorderLayout.NORTH);
 
+        // Product table
         String[] columnNames = {"Product ID", "Name", "Category", "Price", "Info"};
         Object[][] data = {};
         productTable = new JTable(data, columnNames);
         add(new JScrollPane(productTable), BorderLayout.CENTER);
-
         JPanel tablePanel = new JPanel(new BorderLayout());
         JScrollPane scrollPane = new JScrollPane(productTable);
         tablePanel.add(scrollPane, BorderLayout.CENTER);
@@ -64,11 +64,13 @@ public class MainWindow extends JFrame {
         tablePanel.setBorder(BorderFactory.createEmptyBorder(top, left, bottom, right));
         add(tablePanel, BorderLayout.CENTER);
 
+        // Add to cart button
         addToCartButton = new JButton("Add to Shopping Cart");
         add(addToCartButton, BorderLayout.SOUTH);
 
         productTable.setAutoCreateRowSorter(true);
 
+        // Product details labels
         productIdLabel = new JLabel();
         categoryNameLabel = new JLabel();
         nameLabel = new JLabel();
@@ -78,6 +80,13 @@ public class MainWindow extends JFrame {
         attribute1Label = new JLabel();
         attribute2Label = new JLabel();
 
+        // product details panel
+        JLabel detailsLabel = new JLabel("Selected Product - Details");
+        int topPadding = 0, leftPadding = 50, bottomPadding = 10, rightPadding = 50;
+        JPanel detailsPanel = new JPanel(new BorderLayout());
+        JPanel buttonPanel = new JPanel(new FlowLayout());
+        JButton addToCartButton = new JButton("Add to Cart");
+        addToCartButton.setPreferredSize(new Dimension(150, 30));
         JPanel formPanel = new JPanel(new GridLayout(6, 2));
         formPanel.add(new JLabel("Product ID:"));
         formPanel.add(productIdLabel);
@@ -85,34 +94,23 @@ public class MainWindow extends JFrame {
         formPanel.add(categoryNameLabel);
         formPanel.add(new JLabel("Name:"));
         formPanel.add(nameLabel);
-
         formPanel.add(new JLabel("Items Available:"));
         formPanel.add(itemsAvailableLabel);
-
         attribute1NameLabel = new JLabel("Attribute 1:");
         attribute2NameLabel = new JLabel("Attribute 2:");
         formPanel.add(attribute1NameLabel);
         formPanel.add(attribute1Label);
         formPanel.add(attribute2NameLabel);
         formPanel.add(attribute2Label);
-
         add(formPanel, BorderLayout.SOUTH);
-
-        JLabel detailsLabel = new JLabel("Selected Product - Details");
-
-        JPanel buttonPanel = new JPanel(new FlowLayout());
-        JButton addToCartButton = new JButton("Add to Cart");
-        addToCartButton.setPreferredSize(new Dimension(150, 30));
         buttonPanel.add(addToCartButton);
-
-        int topPadding = 0, leftPadding = 50, bottomPadding = 10, rightPadding = 50;
-        JPanel detailsPanel = new JPanel(new BorderLayout());
         detailsPanel.add(detailsLabel, BorderLayout.NORTH);
         detailsPanel.add(formPanel, BorderLayout.CENTER);
         detailsPanel.add(buttonPanel, BorderLayout.SOUTH);
         detailsPanel.setBorder(BorderFactory.createEmptyBorder(topPadding, leftPadding, bottomPadding, rightPadding));
         add(detailsPanel, BorderLayout.SOUTH);
 
+        // Category selector listener
         categorySelector.addActionListener(e -> {
             String selectedCategory = (String) categorySelector.getSelectedItem();
             List<Product> filteredProducts;
@@ -127,6 +125,7 @@ public class MainWindow extends JFrame {
             updateProductTable(filteredProducts);
         });
 
+        // Add to cart button
         addToCartButton.addActionListener(e -> {
             int selectedRow = productTable.getSelectedRow();
             if (selectedRow != -1) {
@@ -137,6 +136,7 @@ public class MainWindow extends JFrame {
             }
         });
 
+        // Table sorting mechanism
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(productTable.getModel());
         productTable.setRowSorter(sorter);
         List<RowSorter.SortKey> sortKeys = new ArrayList<>();
@@ -149,6 +149,7 @@ public class MainWindow extends JFrame {
         updateProductTable(getAllProducts());
     }
 
+    // Update the attribute labels based on the selected product
     private void updateAttributeLabels(Product selectedProduct) {
         if (selectedProduct instanceof Clothing) {
             attribute1NameLabel.setText("Size:");
