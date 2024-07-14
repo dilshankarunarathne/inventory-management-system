@@ -25,7 +25,6 @@ public class MainWindow extends JFrame {
     private final JLabel sizeLabel;
     private final JLabel colorLabel;
     private final JLabel itemsAvailableLabel;
-    // Declaration of dynamic attribute labels
     private final JLabel attribute1Label;
     private final JLabel attribute2Label;
     private final JLabel attribute1NameLabel;
@@ -41,47 +40,29 @@ public class MainWindow extends JFrame {
         setSize(800, 600);
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Category Selector
+        
         categorySelector = new JComboBox<>(new String[]{"All", "Electronics", "Clothing"});
-
-        // Product Table
-        String[] columnNames = {"Product ID", "Name", "Category", "Price", "Info"};
-        Object[][] data = {}; // Populate with product data
-        productTable = new JTable(data, columnNames);
-        add(new JScrollPane(productTable), BorderLayout.CENTER);
-
         JLabel categoryLabel = new JLabel("Select Product Category");
-
-        // Step 2: Add the label and categorySelector to a panel for proper alignment
         JPanel categoryPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         categoryPanel.add(categoryLabel);
         categoryPanel.add(categorySelector);
+        viewCartButton = new JButton("View Shopping Cart");
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        topPanel.add(categoryLabel);
+        topPanel.add(categorySelector);
+        viewCartButton = new JButton("View Shopping Cart");
+        topPanel.add(viewCartButton);
+        add(topPanel, BorderLayout.NORTH);
 
-        // Add to Cart Button
+        String[] columnNames = {"Product ID", "Name", "Category", "Price", "Info"};
+        Object[][] data = {};
+        productTable = new JTable(data, columnNames);
+        add(new JScrollPane(productTable), BorderLayout.CENTER);
+
         addToCartButton = new JButton("Add to Shopping Cart");
         add(addToCartButton, BorderLayout.SOUTH);
 
-        // View Cart Button
-        viewCartButton = new JButton("View Shopping Cart");
-
         productTable.setAutoCreateRowSorter(true);
-
-        // Create a new JPanel to hold the label, category selector, and view cart button
-        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-
-        // Add the category label and category selector to the panel
-        topPanel.add(categoryLabel);
-        topPanel.add(categorySelector);
-
-        // Initialize the viewCartButton if not already done
-        viewCartButton = new JButton("View Shopping Cart");
-
-        // Add the viewCartButton to the panel
-        topPanel.add(viewCartButton);
-
-        // Add the topPanel to the JFrame
-        add(topPanel, BorderLayout.NORTH);
 
         productIdLabel = new JLabel();
         categoryNameLabel = new JLabel();
@@ -92,7 +73,6 @@ public class MainWindow extends JFrame {
         attribute1Label = new JLabel();
         attribute2Label = new JLabel();
 
-        // Add a panel for the form
         JPanel formPanel = new JPanel(new GridLayout(6, 2));
         formPanel.add(new JLabel("Product ID:"));
         formPanel.add(productIdLabel);
