@@ -19,16 +19,22 @@ public class ShoppingCartWindow extends JFrame {
         super("Shopping Cart");
         this.cart = cart;
         setSize(400, 300);
-        setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-        // Cart Table
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Overall padding
+
+        // Cart Table with padding
+        JPanel tablePanel = new JPanel(new BorderLayout());
+        tablePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Padding around the table
         String[] columnNames = {"Product", "Quantity", "Price"};
         Object[][] data = getCartData();
         cartTable = new JTable(data, columnNames);
-        add(new JScrollPane(cartTable), BorderLayout.CENTER);
+        tablePanel.add(new JScrollPane(cartTable), BorderLayout.CENTER);
 
-        // Total and Discounts Panel
+        // Total and Discounts Panel with padding
+        JPanel totalsWrapperPanel = new JPanel(new BorderLayout());
+        totalsWrapperPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Padding around the totals
         JPanel totalsPanel = new JPanel(new GridLayout(4, 2));
         totalsPanel.add(new JLabel("Total:"));
         totalLabel = new JLabel(String.format("%.2f", cart.calculateTotalWithoutDiscount()));
@@ -46,7 +52,14 @@ public class ShoppingCartWindow extends JFrame {
         finalTotalLabel = new JLabel(String.format("%.2f", cart.calculateFinalTotal()));
         totalsPanel.add(finalTotalLabel);
 
-        add(totalsPanel, BorderLayout.SOUTH);
+        totalsWrapperPanel.add(totalsPanel, BorderLayout.CENTER);
+
+        // Adding wrapped components to main panel
+        mainPanel.add(tablePanel, BorderLayout.CENTER);
+        mainPanel.add(totalsWrapperPanel, BorderLayout.SOUTH);
+
+        // Set the main panel as the content pane
+        setContentPane(mainPanel);
     }
 
     private Object[][] getCartData() {

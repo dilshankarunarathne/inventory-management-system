@@ -201,7 +201,6 @@ public class MainWindow extends JFrame {
             }
         });
 
-        // Viewing Cart
         viewCartButton.addActionListener(e -> {
             ShoppingCartWindow cartWindow = new ShoppingCartWindow(cart);
             cartWindow.setVisible(true);
