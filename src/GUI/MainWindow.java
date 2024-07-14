@@ -271,6 +271,7 @@ public class MainWindow extends JFrame {
         return null;
     }
 
+    // Get all products from the shopping manager
     private List<Product> getAllProducts() {
         return westminsterShoppingManager.getAllProducts();
     }
