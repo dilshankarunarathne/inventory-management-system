@@ -198,16 +198,16 @@ public class MainWindow extends JFrame {
                     updateAttributeLabels(selectedProduct);
 
                     // Dynamically update attribute1Label and attribute2Label based on the product category
-                    if (selectedProduct instanceof Clothing) {
-                        attribute1Label.setText(attribute1Label.getText() + " " + ((Clothing) selectedProduct).getSize());
-                        attribute2Label.setText(attribute2Label.getText() + " " + ((Clothing) selectedProduct).getColor());
-                    } else if (selectedProduct instanceof Electronics) {
-                        attribute1Label.setText(attribute1Label.getText() + " " + ((Electronics) selectedProduct).getBrand());
-                        attribute2Label.setText(attribute2Label.getText() + " " + ((Electronics) selectedProduct).getWarrantyPeriod() + " years");
-                    } else {
-                        attribute1Label.setText("N/A");
-                        attribute2Label.setText("N/A");
-                    }
+//                    if (selectedProduct instanceof Clothing) {
+//                        attribute1Label.setText(attribute1Label.getText() + " " + ((Clothing) selectedProduct).getSize());
+//                        attribute2Label.setText(attribute2Label.getText() + " " + ((Clothing) selectedProduct).getColor());
+//                    } else if (selectedProduct instanceof Electronics) {
+//                        attribute1Label.setText(attribute1Label.getText() + " " + ((Electronics) selectedProduct).getBrand());
+//                        attribute2Label.setText(attribute2Label.getText() + " " + ((Electronics) selectedProduct).getWarrantyPeriod() + " years");
+//                    } else {
+//                        attribute1Label.setText("N/A");
+//                        attribute2Label.setText("N/A");
+//                    }
                 }
             }
         });
