@@ -36,20 +36,33 @@ public class ShoppingCartWindow extends JFrame {
         JPanel totalsWrapperPanel = new JPanel(new BorderLayout());
         totalsWrapperPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Padding around the totals
         JPanel totalsPanel = new JPanel(new GridLayout(4, 2));
-        totalsPanel.add(new JLabel("Total:"));
+
+        JLabel totalTextLabel = new JLabel("Total:");
+        totalTextLabel.setHorizontalAlignment(JLabel.RIGHT);
+        totalsPanel.add(totalTextLabel);
         totalLabel = new JLabel(String.format("%.2f", cart.calculateTotalWithoutDiscount()));
+        totalLabel.setHorizontalAlignment(JLabel.LEFT);
         totalsPanel.add(totalLabel);
 
-        totalsPanel.add(new JLabel("First Purchase Discount:"));
+        JLabel firstPurchaseDiscountTextLabel = new JLabel("First Purchase Discount:");
+        firstPurchaseDiscountTextLabel.setHorizontalAlignment(JLabel.RIGHT);
+        totalsPanel.add(firstPurchaseDiscountTextLabel);
         firstPurchaseDiscountLabel = new JLabel(String.format("%.2f", cart.calculateFirstPurchaseDiscount()));
+        firstPurchaseDiscountLabel.setHorizontalAlignment(JLabel.LEFT);
         totalsPanel.add(firstPurchaseDiscountLabel);
 
-        totalsPanel.add(new JLabel("Category Discount:"));
+        JLabel categoryDiscountTextLabel = new JLabel("Category Discount:");
+        categoryDiscountTextLabel.setHorizontalAlignment(JLabel.RIGHT);
+        totalsPanel.add(categoryDiscountTextLabel);
         categoryDiscountLabel = new JLabel(String.format("%.2f", cart.calculateCategoryDiscount()));
+        categoryDiscountLabel.setHorizontalAlignment(JLabel.LEFT);
         totalsPanel.add(categoryDiscountLabel);
 
-        totalsPanel.add(new JLabel("Final Total:"));
+        JLabel finalTotalTextLabel = new JLabel("Final Total:");
+        finalTotalTextLabel.setHorizontalAlignment(JLabel.RIGHT);
+        totalsPanel.add(finalTotalTextLabel);
         finalTotalLabel = new JLabel(String.format("%.2f", cart.calculateFinalTotal()));
+        finalTotalLabel.setHorizontalAlignment(JLabel.LEFT);
         totalsPanel.add(finalTotalLabel);
 
         totalsWrapperPanel.add(totalsPanel, BorderLayout.CENTER);
