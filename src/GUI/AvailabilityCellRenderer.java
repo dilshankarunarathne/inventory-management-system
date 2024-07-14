@@ -25,6 +25,7 @@ public class AvailabilityCellRenderer extends DefaultTableCellRenderer {
         return null;
     }
 
+    // Get table cell renderer component
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
