@@ -212,6 +212,7 @@ public class MainWindow extends JFrame {
         return "Unknown";
     }
 
+    // Update the product table with the given list of products
     private void updateProductTable(List<Product> products) {
         DefaultTableModel model = (DefaultTableModel) productTable.getModel();
         model.setRowCount(0);
