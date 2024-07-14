@@ -11,6 +11,14 @@ public class User {
         firstOrderDone = false;
     }
 
+    public boolean isFirstOrderDone() {
+        return firstOrderDone;
+    }
+
+    public void setFirstOrderDone(boolean firstOrderDone) {
+        this.firstOrderDone = firstOrderDone;
+    }
+
     public String getUsername() {
         return username;
     }
