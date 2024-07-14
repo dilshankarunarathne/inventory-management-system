@@ -203,15 +203,6 @@ public class MainWindow extends JFrame {
         });
     }
 
-    private String getCategory(Product p) {
-        if (p instanceof Clothing) {
-            return "Clothing";
-        } else if (p instanceof Electronics) {
-            return "Electronics";
-        }
-        return "Unknown";
-    }
-
     // Update the product table with the given list of products
     private void updateProductTable(List<Product> products) {
         DefaultTableModel model = (DefaultTableModel) productTable.getModel();
@@ -274,5 +265,14 @@ public class MainWindow extends JFrame {
     // Get all products from the shopping manager
     private List<Product> getAllProducts() {
         return westminsterShoppingManager.getAllProducts();
+    }
+
+    private String getCategory(Product p) {
+        if (p instanceof Clothing) {
+            return "Clothing";
+        } else if (p instanceof Electronics) {
+            return "Electronics";
+        }
+        return "Unknown";
     }
 }
