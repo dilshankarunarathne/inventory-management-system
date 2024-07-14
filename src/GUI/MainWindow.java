@@ -267,6 +267,7 @@ public class MainWindow extends JFrame {
         return westminsterShoppingManager.getAllProducts();
     }
 
+    // Get the category of a product
     private String getCategory(Product p) {
         if (p instanceof Clothing) {
             return "Clothing";
