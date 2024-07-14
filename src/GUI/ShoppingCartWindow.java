@@ -77,6 +77,7 @@ public class ShoppingCartWindow extends JFrame {
         setContentPane(mainPanel);
     }
 
+    // Helper method to get cart data
     private Object[][] getCartData() {
         Map<Product, Integer> items = cart.getItems();
         Object[][] data = new Object[items.size()][3];
