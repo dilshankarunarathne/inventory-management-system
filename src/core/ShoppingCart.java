@@ -30,6 +30,7 @@ public class ShoppingCart {
         return products.stream().mapToDouble(Product::getPrice).sum();
     }
 
+    // Calculate the discount for the first purchase
     public double calculateFirstPurchaseDiscount() {
         if (isFirstPurchase) {
             return calculateTotalWithoutDiscount() * 0.1; // 10% discount
