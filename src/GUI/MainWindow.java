@@ -14,16 +14,24 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 public class MainWindow extends JFrame {
-    private JComboBox<String> categorySelector;
-    private JTable productTable;
-    private JButton viewCartButton, addToCartButton;
-    private ShoppingCart cart;
-    private JLabel productIdLabel, categoryNameLabel, nameLabel, sizeLabel, colorLabel, itemsAvailableLabel;
+    private final JComboBox<String> categorySelector;
+    private final JTable productTable;
+    private JButton viewCartButton;
+    private final JButton addToCartButton;
+    private final ShoppingCart cart;
+    private final JLabel productIdLabel;
+    private final JLabel categoryNameLabel;
+    private final JLabel nameLabel;
+    private final JLabel sizeLabel;
+    private final JLabel colorLabel;
+    private final JLabel itemsAvailableLabel;
     // Declaration of dynamic attribute labels
-    private JLabel attribute1Label, attribute2Label;
-    private JLabel attribute1NameLabel, attribute2NameLabel;
+    private final JLabel attribute1Label;
+    private final JLabel attribute2Label;
+    private final JLabel attribute1NameLabel;
+    private final JLabel attribute2NameLabel;
 
-    private WestminsterShoppingManager westminsterShoppingManager;
+    private final WestminsterShoppingManager westminsterShoppingManager;
 
     public MainWindow(ShoppingCart cart, WestminsterShoppingManager westminsterShoppingManager) {
         super("Westminster Shopping Centre");

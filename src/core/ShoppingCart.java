@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ShoppingCart {
-    private List<Product> products;
+    private final List<Product> products;
     private boolean isFirstPurchase;
 
     public ShoppingCart() {

@@ -8,7 +8,7 @@ import java.awt.Color;
 import java.util.List;
 
 public class AvailabilityCellRenderer extends DefaultTableCellRenderer {
-    private List<Product> products;
+    private final List<Product> products;
 
     public AvailabilityCellRenderer(List<Product> products) {
         this.products = products;

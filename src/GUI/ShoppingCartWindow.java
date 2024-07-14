@@ -8,9 +8,12 @@ import java.awt.*;
 import java.util.Map;
 
 public class ShoppingCartWindow extends JFrame {
-    private JTable cartTable;
-    private JLabel totalLabel, firstPurchaseDiscountLabel, categoryDiscountLabel, finalTotalLabel;
-    private ShoppingCart cart;
+    private final JTable cartTable;
+    private final JLabel totalLabel;
+    private final JLabel firstPurchaseDiscountLabel;
+    private final JLabel categoryDiscountLabel;
+    private final JLabel finalTotalLabel;
+    private final ShoppingCart cart;
 
     public ShoppingCartWindow(ShoppingCart cart) {
         super("Shopping Cart");
