@@ -1,5 +1,7 @@
 package core;
 
+import GUI.UserManager;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,15 +11,21 @@ import java.util.stream.Collectors;
 public class ShoppingCart {
     private final List<Product> products;
     private boolean isFirstPurchase;
+    private User user;
 
-    public ShoppingCart() {
+    public ShoppingCart(User user) {
         this.products = new ArrayList<>();
-        this.isFirstPurchase = true; // Assuming this is the first purchase by default
+        this.user = user;
+        this.isFirstPurchase = !user.isFirstOrderDone(); // Use the getter from User
     }
 
     // Add products to the cart
     public void addProduct(Product product) {
         products.add(product);
+        if (!user.isFirstOrderDone()) {
+            user.setFirstOrderDone(true); // Set firstOrderDone to true
+            saveUserData(); // Save the user data
+        }
     }
 
     // Calculate the total price of the products in the cart
@@ -47,7 +55,11 @@ public class ShoppingCart {
     // Calculate the final total price after applying all discounts
     public double calculateFinalTotal() {
         double total = calculateTotalWithoutDiscount();
-        total -= calculateFirstPurchaseDiscount();
+        if (!user.isFirstOrderDone()) {
+            total -= calculateFirstPurchaseDiscount();
+            user.setFirstOrderDone(true); // Set firstOrderDone to true
+            // Save the user data here
+        }
         total -= calculateCategoryDiscount();
         return total;
     }
@@ -71,18 +83,8 @@ public class ShoppingCart {
         return itemsWithQuantities;
     }
 
-    // Get the categories of the products in the cart
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    // Check if this is the first purchase
-    public boolean isFirstPurchase() {
-        return isFirstPurchase;
-    }
-
-    // Set the first purchase status
-    public void setFirstPurchase(boolean isFirstPurchase) {
-        this.isFirstPurchase = isFirstPurchase;
+    private void saveUserData() {
+        UserManager userManager = new UserManager();
+        userManager.updateUser(this.user); // Update the user data in the file
     }
 }

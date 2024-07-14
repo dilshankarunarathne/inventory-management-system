@@ -1,6 +1,7 @@
 package GUI;
 
 import core.ShoppingCart;
+import core.User;
 import core.WestminsterShoppingManager;
 
 import javax.swing.*;
@@ -46,10 +47,11 @@ public class LoginWindow extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (userManager.loginUser(usernameField.getText(), new String(passwordField.getPassword()))) {
+                User user = userManager.loginUser(usernameField.getText(), new String(passwordField.getPassword()));
+                if (user != null) {
                     JOptionPane.showMessageDialog(LoginWindow.this, "Login Successful");
                     dispose();
-                    new MainWindow(new ShoppingCart(), new WestminsterShoppingManager()).setVisible(true);
+                    new MainWindow(new ShoppingCart(user), new WestminsterShoppingManager()).setVisible(true); // Pass User to ShoppingCart
                 } else {
                     JOptionPane.showMessageDialog(LoginWindow.this, "Login Failed", "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -59,7 +61,8 @@ public class LoginWindow extends JFrame {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (userManager.registerUser(usernameField.getText(), new String(passwordField.getPassword()))) {
+                User user = userManager.registerUser(usernameField.getText(), new String(passwordField.getPassword()));
+                if (user != null) {
                     JOptionPane.showMessageDialog(LoginWindow.this, "Registration Successful. Please login.");
                 } else {
                     JOptionPane.showMessageDialog(LoginWindow.this, "Registration Failed: User already exists", "Error", JOptionPane.ERROR_MESSAGE);

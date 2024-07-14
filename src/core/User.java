@@ -5,10 +5,10 @@ public class User {
     private String password;
     private boolean firstOrderDone;
 
-    public User(String username, String password) {
+    public User(String username, String password, boolean firstOrderDone) {
         this.username = username;
         this.password = password;
-        firstOrderDone = false;
+        this.firstOrderDone = firstOrderDone;
     }
 
     public boolean isFirstOrderDone() {
