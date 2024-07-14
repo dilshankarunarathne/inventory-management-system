@@ -92,14 +92,10 @@ public class MainWindow extends JFrame {
         formPanel.add(categoryNameLabel);
         formPanel.add(new JLabel("Name:"));
         formPanel.add(nameLabel);
-//        formPanel.add(new JLabel("Attribute 1:"));
-//        formPanel.add(attribute1Label);
-//        formPanel.add(new JLabel("Attribute 2:"));
-//        formPanel.add(attribute2Label);
+
         formPanel.add(new JLabel("Items Available:"));
         formPanel.add(itemsAvailableLabel);
 
-        // Inside the MainWindow constructor or an initialization method
         attribute1NameLabel = new JLabel("Attribute 1:");
         attribute2NameLabel = new JLabel("Attribute 2:");
         formPanel.add(attribute1NameLabel);
@@ -107,21 +103,16 @@ public class MainWindow extends JFrame {
         formPanel.add(attribute2NameLabel);
         formPanel.add(attribute2Label);
 
-        // Add the formPanel to the JFrame
         add(formPanel, BorderLayout.SOUTH);
 
-        // Step 1: Create the label and button
         JLabel detailsLabel = new JLabel("Selected Product - Details");
         JButton addToCartButton = new JButton("Add to Cart");
 
-        // Step 2 & 3 & 4: Create a new panel for the label, form, and button
         JPanel detailsPanel = new JPanel(new BorderLayout());
         detailsPanel.add(detailsLabel, BorderLayout.NORTH);
-        detailsPanel.add(formPanel, BorderLayout.CENTER); // Assuming formPanel is your existing form panel
+        detailsPanel.add(formPanel, BorderLayout.CENTER);
         detailsPanel.add(addToCartButton, BorderLayout.SOUTH);
 
-        // Step 5: Add the detailsPanel to the MainWindow
-        // Assuming you want to replace the existing formPanel in the SOUTH of the MainWindow
         add(detailsPanel, BorderLayout.SOUTH);
 
         categorySelector.addActionListener(e -> {
