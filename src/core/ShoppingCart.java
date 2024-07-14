@@ -15,6 +15,7 @@ public class ShoppingCart {
         this.isFirstPurchase = true; // Assuming this is the first purchase by default
     }
 
+    // Add and remove products from the cart
     public void addProduct(Product product) {
         products.add(product);
     }
