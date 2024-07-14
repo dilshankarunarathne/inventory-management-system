@@ -67,6 +67,7 @@ public class ShoppingCart {
         return categoryCounts;
     }
 
+    // Get the items in the cart with their quantities
     public Map<Product, Integer> getItems() {
         Map<Product, Integer> itemsWithQuantities = new HashMap<>();
         for (Product product : products) {
