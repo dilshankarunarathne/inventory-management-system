@@ -49,6 +49,7 @@ public class ShoppingCart {
         return 0;
     }
 
+    // Calculate the final total price after applying all discounts
     public double calculateFinalTotal() {
         double total = calculateTotalWithoutDiscount();
         total -= calculateFirstPurchaseDiscount();
