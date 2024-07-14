@@ -268,7 +268,6 @@ public class MainWindow extends JFrame {
 
     // Method to find a Product by its ID
     private Product findProductById(String productId) {
-        // Assuming getAllProducts() returns a List<Product> of all available products
         for (Product product : getAllProducts()) {
             if (product.getProductId().equals(productId)) {
                 return product;
