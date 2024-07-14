@@ -24,7 +24,7 @@ public class ShoppingCartWindow extends JFrame {
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // Cart Table with padding
+        // Table Panel with padding
         JPanel tablePanel = new JPanel(new BorderLayout());
         tablePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         String[] columnNames = {"Product", "Quantity", "Price"};
@@ -37,6 +37,7 @@ public class ShoppingCartWindow extends JFrame {
         totalsWrapperPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         JPanel totalsPanel = new JPanel(new GridLayout(4, 2));
 
+        // Labels for Total and Discounts
         JLabel totalTextLabel = new JLabel("Total");
         totalTextLabel.setHorizontalAlignment(JLabel.RIGHT);
         totalsPanel.add(totalTextLabel);
@@ -44,6 +45,7 @@ public class ShoppingCartWindow extends JFrame {
         totalLabel.setHorizontalAlignment(JLabel.LEFT);
         totalsPanel.add(totalLabel);
 
+        // First Purchase Discount
         JLabel firstPurchaseDiscountTextLabel = new JLabel("First Purchase Discount (10%)");
         firstPurchaseDiscountTextLabel.setHorizontalAlignment(JLabel.RIGHT);
         totalsPanel.add(firstPurchaseDiscountTextLabel);
