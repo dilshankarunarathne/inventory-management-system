@@ -8,6 +8,10 @@ Trincomalee, Sri Lanka
 
 ## Overview
 
+This is a Java-Swing based application for store management. Managers have a console application for inventory 
+management and the users are given a GUI application for purchasing items. 
+
+- Java 17 LTS
 
 ## Contributions
 
