@@ -3,19 +3,17 @@ package GUI;
 import core.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
-
 public class MainWindow extends JFrame {
     private final JComboBox<String> categorySelector;
     private final JTable productTable;
-    private JButton viewCartButton;
     private final JButton addToCartButton;
     private final ShoppingCart cart;
     private final JLabel productIdLabel;
@@ -28,8 +26,8 @@ public class MainWindow extends JFrame {
     private final JLabel attribute2Label;
     private final JLabel attribute1NameLabel;
     private final JLabel attribute2NameLabel;
-
     private final WestminsterShoppingManager westminsterShoppingManager;
+    private JButton viewCartButton;
 
     public MainWindow(ShoppingCart cart, WestminsterShoppingManager westminsterShoppingManager) {
         super("Westminster Shopping Centre");
@@ -121,7 +119,6 @@ public class MainWindow extends JFrame {
             if ("All".equals(selectedCategory)) {
                 filteredProducts = getAllProducts();
             } else {
-                // todo simplify this logic
                 filteredProducts = getAllProducts().stream()
                         .filter(product -> product instanceof Clothing && "Clothing".equals(selectedCategory)
                                 || product instanceof Electronics && "Electronics".equals(selectedCategory))

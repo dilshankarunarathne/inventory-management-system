@@ -4,9 +4,9 @@ import java.io.*;
 import java.util.*;
 
 public class WestminsterShoppingManager implements ShoppingManager {
-    private Map<String, Product> products = new HashMap<>();
     private final int MAX_PRODUCTS = 50;
     private final String PRODUCTS_FILE = "products.dat";
+    private Map<String, Product> products = new HashMap<>();
 
     public WestminsterShoppingManager() {
         loadProducts();

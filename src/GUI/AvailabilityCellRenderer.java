@@ -1,10 +1,10 @@
 package GUI;
 
 import core.Product;
+
+import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.JTable;
-import java.awt.Component;
-import java.awt.Color;
+import java.awt.*;
 import java.util.List;
 
 public class AvailabilityCellRenderer extends DefaultTableCellRenderer {
