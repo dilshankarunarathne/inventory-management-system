@@ -81,6 +81,7 @@ public class ShoppingCart {
         return products;
     }
 
+    // Check if this is the first purchase
     public boolean isFirstPurchase() {
         return isFirstPurchase;
     }
