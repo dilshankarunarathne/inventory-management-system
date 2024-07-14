@@ -12,6 +12,7 @@ public class WestminsterShoppingManager implements ShoppingManager {
         loadProducts();
     }
 
+    // Display the management menu
     public void displayMenu() {
         Scanner scanner = new Scanner(System.in);
         String choice;
