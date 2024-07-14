@@ -38,6 +38,7 @@ public class ShoppingCart {
         return 0;
     }
 
+    // Calculate the discount for having three or more items in the same category
     public double calculateCategoryDiscount() {
         Map<String, Long> categoryCounts = products.stream().collect(Collectors.groupingBy(Product::getCategory, Collectors.counting()));
         for (Long count : categoryCounts.values()) {
