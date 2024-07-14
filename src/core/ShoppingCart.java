@@ -86,6 +86,7 @@ public class ShoppingCart {
         return isFirstPurchase;
     }
 
+    // Set the first purchase status
     public void setFirstPurchase(boolean isFirstPurchase) {
         this.isFirstPurchase = isFirstPurchase;
     }
