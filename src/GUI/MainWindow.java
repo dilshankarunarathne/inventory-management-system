@@ -232,6 +232,7 @@ public class MainWindow extends JFrame {
         }
     }
 
+    // Get the details of a product
     private String getDetails(Product product) {
         if (product instanceof Clothing) {
             return ((Clothing) product).getSize() + ", " + ((Clothing) product).getColor();
