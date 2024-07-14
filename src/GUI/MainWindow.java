@@ -106,7 +106,6 @@ public class MainWindow extends JFrame {
         JButton addToCartButton = new JButton("Add to Cart");
         addToCartButton.setPreferredSize(new Dimension(150, 30));
         buttonPanel.add(addToCartButton);
-//        add(buttonPanel, BorderLayout.SOUTH);
 
         int topPadding = 0, leftPadding = 50, bottomPadding = 10, rightPadding = 50;
         JPanel detailsPanel = new JPanel(new BorderLayout());
@@ -148,7 +147,6 @@ public class MainWindow extends JFrame {
         sorter.setSortKeys(sortKeys);
         sorter.sort();
 
-        // Event Listeners
         setupListeners();
         refreshProductTable();
         updateProductTable(getAllProducts());
@@ -184,7 +182,6 @@ public class MainWindow extends JFrame {
     }
 
     private void setupListeners() {
-        // Selecting Products
         productTable.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && productTable.getSelectedRow() != -1) {
                 String productId = (String) productTable.getValueAt(productTable.getSelectedRow(), 0);
@@ -195,7 +192,6 @@ public class MainWindow extends JFrame {
                     nameLabel.setText(selectedProduct.getProductName());
                     itemsAvailableLabel.setText(String.valueOf(selectedProduct.getAvailableItems()));
 
-                    // Update the attribute labels based on the product category
                     updateAttributeLabels(selectedProduct);
                 }
             }
@@ -218,14 +214,14 @@ public class MainWindow extends JFrame {
 
     private void updateProductTable(List<Product> products) {
         DefaultTableModel model = (DefaultTableModel) productTable.getModel();
-        model.setRowCount(0); // Clear existing rows
+        model.setRowCount(0);
         for (Product product : products) {
             model.addRow(new Object[]{
                     product.getProductId(),
                     product.getProductName(),
                     getCategory(product),
                     product.getPrice(),
-                    product.toString() // Assuming toString() method returns the product details
+                    getDetails(product)
             });
         }
 
@@ -246,22 +242,20 @@ public class MainWindow extends JFrame {
             data[i][1] = product.getProductName();
             data[i][2] = getCategory(product);
             data[i][3] = product.getPrice();
-            // Update this line to include actual product details instead of just "Details"
-            data[i][4] = product.toString(); // Assuming toString() method of Product class returns the details
+            data[i][4] = product.toString();
         }
 
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
         productTable.setModel(model);
     }
 
-    // Method to find a Product by its ID
     private Product findProductById(String productId) {
         for (Product product : getAllProducts()) {
             if (product.getProductId().equals(productId)) {
                 return product;
             }
         }
-        return null; // or throw an exception if the product is not found
+        return null;
     }
 
     private List<Product> getAllProducts() {
