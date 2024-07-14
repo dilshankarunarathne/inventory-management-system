@@ -155,23 +155,23 @@ public class MainWindow extends JFrame {
     }
 
     private void updateAttributeLabels(Product selectedProduct) {
-    if (selectedProduct instanceof Clothing) {
-        attribute1NameLabel.setText("Size:");
-        attribute2NameLabel.setText("Color:");
-        attribute1Label.setText(((Clothing) selectedProduct).getSize());
-        attribute2Label.setText(((Clothing) selectedProduct).getColor());
-    } else if (selectedProduct instanceof Electronics) {
-        attribute1NameLabel.setText("Brand:");
-        attribute2NameLabel.setText("Warranty Period:");
-        attribute1Label.setText(((Electronics) selectedProduct).getBrand());
-        attribute2Label.setText(((Electronics) selectedProduct).getWarrantyPeriod() + " years");
-    } else {
-        attribute1NameLabel.setText("N/A");
-        attribute2NameLabel.setText("N/A");
-        attribute1Label.setText("");
-        attribute2Label.setText("");
+        if (selectedProduct instanceof Clothing) {
+            attribute1NameLabel.setText("Size:");
+            attribute2NameLabel.setText("Color:");
+            attribute1Label.setText(((Clothing) selectedProduct).getSize());
+            attribute2Label.setText(((Clothing) selectedProduct).getColor());
+        } else if (selectedProduct instanceof Electronics) {
+            attribute1NameLabel.setText("Brand:");
+            attribute2NameLabel.setText("Warranty Period:");
+            attribute1Label.setText(((Electronics) selectedProduct).getBrand());
+            attribute2Label.setText(((Electronics) selectedProduct).getWarrantyPeriod() + " years");
+        } else {
+            attribute1NameLabel.setText("N/A");
+            attribute2NameLabel.setText("N/A");
+            attribute1Label.setText("");
+            attribute2Label.setText("");
+        }
     }
-}
 
     private void addProductToCart(String productId) {
         Product product = findProductById(productId);
