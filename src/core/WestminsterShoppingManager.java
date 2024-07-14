@@ -89,6 +89,7 @@ public class WestminsterShoppingManager implements ShoppingManager {
         }
     }
 
+    // Delete a product from the system
     public void deleteProduct(Scanner scanner) {
         System.out.print("Enter the product ID to delete: ");
         String productId = scanner.nextLine();
