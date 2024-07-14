@@ -232,7 +232,12 @@ public class MainWindow extends JFrame {
     }
 
     private String getDetails(Product product) {
-        
+        if (product instanceof Clothing) {
+            return "Clothing";
+        } else if (product instanceof Electronics) {
+            return "Electronics";
+        }
+        return "Unknown";
     }
 
     private void refreshProductTable() {
