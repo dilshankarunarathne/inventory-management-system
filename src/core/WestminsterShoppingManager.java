@@ -100,6 +100,7 @@ public class WestminsterShoppingManager implements ShoppingManager {
         }
     }
 
+    // Print the list of products
     public void printProducts() {
         if (products.isEmpty()) {
             System.out.println("No products available.");
