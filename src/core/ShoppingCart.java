@@ -20,11 +20,6 @@ public class ShoppingCart {
         products.add(product);
     }
 
-    // Remove products from the cart
-    public void removeProduct(Product product) {
-        products.remove(product);
-    }
-
     // Calculate the total price of the products in the cart
     public double calculateTotalWithoutDiscount() {
         return products.stream().mapToDouble(Product::getPrice).sum();
