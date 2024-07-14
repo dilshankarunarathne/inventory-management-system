@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.util.List;
 
+// AvailabilityCellRenderer class to render the availability of products in the table
 public class AvailabilityCellRenderer extends DefaultTableCellRenderer {
     private final List<Product> products;
 
@@ -14,6 +15,7 @@ public class AvailabilityCellRenderer extends DefaultTableCellRenderer {
         this.products = products;
     }
 
+    // Find product by product ID
     private Product findProductById(String productId) {
         for (Product product : this.products) {
             if (product.getProductId().equals(productId)) {
