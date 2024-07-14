@@ -169,6 +169,7 @@ public class MainWindow extends JFrame {
         }
     }
 
+    // Add a product to the shopping cart
     private void addProductToCart(String productId) {
         Product product = findProductById(productId);
         if (product != null) {
