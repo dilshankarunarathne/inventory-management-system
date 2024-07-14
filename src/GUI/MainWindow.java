@@ -231,6 +231,10 @@ public class MainWindow extends JFrame {
         }
     }
 
+    private String getDetails(Product product) {
+        
+    }
+
     private void refreshProductTable() {
         List<Product> allProducts = getAllProducts();
         String[] columnNames = {"Product ID", "Name", "Category", "Price", "Info"};
