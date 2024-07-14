@@ -112,6 +112,7 @@ public class WestminsterShoppingManager implements ShoppingManager {
         }
     }
 
+    // Save products to file
     public void saveProducts() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PRODUCTS_FILE))) {
             oos.writeObject(products);
