@@ -102,12 +102,12 @@ public class MainWindow extends JFrame {
 
         JLabel detailsLabel = new JLabel("Selected Product - Details");
         JButton addToCartButton = new JButton("Add to Cart");
-
+        int topPadding = 0, leftPadding = 50, bottomPadding = 10, rightPadding = 50;
         JPanel detailsPanel = new JPanel(new BorderLayout());
         detailsPanel.add(detailsLabel, BorderLayout.NORTH);
         detailsPanel.add(formPanel, BorderLayout.CENTER);
         detailsPanel.add(addToCartButton, BorderLayout.SOUTH);
-
+        detailsPanel.setBorder(BorderFactory.createEmptyBorder(topPadding, leftPadding, bottomPadding, rightPadding));
         add(detailsPanel, BorderLayout.SOUTH);
 
         categorySelector.addActionListener(e -> {
