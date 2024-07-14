@@ -25,6 +25,7 @@ public class ShoppingCart {
         products.remove(product);
     }
 
+    // Calculate the total price of the products in the cart
     public double calculateTotalWithoutDiscount() {
         return products.stream().mapToDouble(Product::getPrice).sum();
     }
