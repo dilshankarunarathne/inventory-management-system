@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -40,7 +39,7 @@ public class MainWindow extends JFrame {
         setSize(800, 600);
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
         categorySelector = new JComboBox<>(new String[]{"All", "Electronics", "Clothing"});
         JLabel categoryLabel = new JLabel("Select Product Category");
         JPanel categoryPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
