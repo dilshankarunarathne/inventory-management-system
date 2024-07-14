@@ -48,6 +48,7 @@ public class WestminsterShoppingManager implements ShoppingManager {
         } while (!choice.equals("5"));
     }
 
+    // Add a new product to the system
     private void addProduct(Scanner scanner) {
         if (products.size() >= MAX_PRODUCTS) {
             System.out.println("Cannot add more products. The system is at its maximum capacity.");
