@@ -20,6 +20,7 @@ public class ShoppingCart {
         products.add(product);
     }
 
+    // Remove products from the cart
     public void removeProduct(Product product) {
         products.remove(product);
     }
