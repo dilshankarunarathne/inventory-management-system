@@ -57,6 +57,7 @@ public class ShoppingCart {
         return total;
     }
 
+    // Get the data for the cart table
     private Map<String, Integer> getCategoryCounts() {
         Map<String, Integer> categoryCounts = new HashMap<>();
         for (Product product : products) {
