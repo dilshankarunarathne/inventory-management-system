@@ -261,6 +261,7 @@ public class MainWindow extends JFrame {
         productTable.setModel(model);
     }
 
+    // Find a product by its ID
     private Product findProductById(String productId) {
         for (Product product : getAllProducts()) {
             if (product.getProductId().equals(productId)) {
