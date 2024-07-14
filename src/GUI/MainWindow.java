@@ -46,7 +46,7 @@ public class MainWindow extends JFrame {
         categoryPanel.add(categoryLabel);
         categoryPanel.add(categorySelector);
         viewCartButton = new JButton("View Shopping Cart");
-        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel topPanel = new JPanel();
         topPanel.add(categoryLabel);
         topPanel.add(categorySelector);
         viewCartButton = new JButton("View Shopping Cart");
